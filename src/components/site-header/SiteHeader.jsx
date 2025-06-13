@@ -3,7 +3,7 @@ import React from "react";
 function SiteHeader() {
   return (
     <div>
-      <h1>SiteHeader</h1>
+      <div className="text-9xl font-accent font-semibold text-yellow dark:text-dark-yellow">SiteHeader</div>
     </div>
   )
 };

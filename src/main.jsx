@@ -8,6 +8,7 @@ import App from "./App.jsx";
 import { ErrorBoundary } from "./components/error-boundary/ErrorBoundary.jsx";
 
 import { ErrorHandlerProvider } from "./context/ErrorHandlerProvider.jsx";
+import ThemeProvider from "./context/ThemeProvider.jsx";
 
 // Poppins weights
 import "@fontsource/poppins/300.css"; // Light
@@ -30,7 +31,9 @@ createRoot(document.getElementById("root")).render(
     <ErrorBoundary>
       <BrowserRouter>
         <ErrorHandlerProvider>
-          <App />
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
         </ErrorHandlerProvider>
       </BrowserRouter>
     </ErrorBoundary>

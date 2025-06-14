@@ -7,7 +7,7 @@ function SiteHeader() {
   const { theme, toggleTheme } = useThemeContext();
   return (
     <div>
-      <div className="text-9xl font-accent font-semibold text-text">
+      <div className="text-9xl font-accent font-semibold text-yellow">
         SiteHeader
       </div>
 
@@ -17,9 +17,9 @@ function SiteHeader() {
         aria-label="Toggle Theme"
       >
         {theme === "dark" ? (
-          <FiMoon className="text-yellow-400 w-6 h-6" />
+          <FiMoon className="text-yellow w-6 h-6" />
         ) : (
-          <FiSun className="text-gray-800 w-6 h-6" />
+          <FiSun className="text-gray w-6 h-6" />
         )}
       </button>
 

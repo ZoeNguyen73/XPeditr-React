@@ -5,7 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 
-import { ErrorBoundary } from "./components/error-boundary/ErrorBoundary.jsx"
+import { ErrorBoundary } from "./components/error-boundary/ErrorBoundary.jsx";
+
+import { ErrorHandlerProvider } from "./context/ErrorHandlerProvider.jsx";
 
 // Poppins weights
 import "@fontsource/poppins/300.css"; // Light
@@ -27,7 +29,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ErrorBoundary>
       <BrowserRouter>
-        <App />
+        <ErrorHandlerProvider>
+          <App />
+        </ErrorHandlerProvider>
       </BrowserRouter>
     </ErrorBoundary>
   </StrictMode>,

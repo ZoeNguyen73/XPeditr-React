@@ -5,17 +5,15 @@ import { useThemeContext } from "../../context/ThemeProvider";
 
 function SiteHeader() {
   const { theme, toggleTheme } = useThemeContext();
-  const isDark = theme === "dark";
-
   return (
     <div>
-      <div className="text-9xl font-accent font-semibold text-yellow dark:text-dark-yellow">
+      <div className="text-9xl font-accent font-semibold text-text">
         SiteHeader
       </div>
 
       <button
         onClick={toggleTheme}
-        className="p-2 rounded-full transition bg-background dark:bg-dark-background"
+        className="p-2 rounded-full transition bg-background"
         aria-label="Toggle Theme"
       >
         {theme === "dark" ? (

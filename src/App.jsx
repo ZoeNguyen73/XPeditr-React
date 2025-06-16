@@ -31,6 +31,7 @@ function App() {
             handlePress={() => setCrash(true)}
             title="Crash the app"
             icon="🚨"
+            // isLoading={true}
           />
         </div>
       )}

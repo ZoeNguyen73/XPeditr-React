@@ -1,5 +1,7 @@
 import React from "react";
 
+import { LoaderCircle } from "lucide-react";
+
 import { cn } from "../../utils/ClassName";
 
 const baseStyles = "inline-flex items-center justify-center font-sans font-medium tracking-wider rounded-xl transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
@@ -20,7 +22,6 @@ const variantStyles = {
 const Button = ({
   title,
   icon,
-  iconPosition = "left",
   handlePress,
   containerStyles,
   variant = "primary",
@@ -44,13 +45,13 @@ const Button = ({
       onClick={handlePress}
       {...props}
     >
-      { icon && iconPosition == "left" && (
+      { icon && !isLoading && (
         <p>{icon}</p>
+      )}
+      { isLoading && (
+        <LoaderCircle className="animate-spin h-4 w-4 mr-2" />
       )}
       <p>{title}</p>
-      { icon && iconPosition == "right" && (
-        <p>{icon}</p>
-      )}
       
     </button>
   )

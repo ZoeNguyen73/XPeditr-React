@@ -30,6 +30,7 @@ function App() {
           <Button 
             handlePress={() => setCrash(true)}
             title="Crash the app"
+            icon="🚨"
           />
         </div>
       )}

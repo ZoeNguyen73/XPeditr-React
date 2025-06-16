@@ -10,6 +10,13 @@ const sizeStyles = {
   lg: "text-lg px-5 py-3",
 };
 
+const variantStyles = {
+  primary: "bg-btn-primary-bg text-btn-primary-text border-btn-primary-border hover:bg-btn-primary-hover",
+  secondary: "bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover",
+  tertiary: "bg-btn-tertiary-bg text-btn-tertiary-text border-btn-tertiary-border hover:bg-btn-tertiary-hover",
+  danger: "bg-btn-danger-bg text-btn-danger-text border-btn-danger-border hover:bg-btn-danger-hover",
+}
+
 const Button = ({
   title,
   icon,
@@ -23,25 +30,27 @@ const Button = ({
   fullWidth = false,
   ...props
 }) => {
-
-  const variantStyles = `bg-btn-${variant}-bg text-btn-${variant}-text border-btn-${variant}-border hover:bg-btn-${variant}-hover`;
   
   return (
     <button
       className ={cn(
         baseStyles,
-        variantStyles,
+        variantStyles[variant],
         sizeStyles[size],
         fullWidth && "w-full",
       )}
+
       disabled={disabled||isLoading}
       onClick={handlePress}
       {...props}
     >
       { icon && iconPosition == "left" && (
-        <div>{icon}</div>
+        <p>{icon}</p>
       )}
-      <p className="text-btn-primary-text">Crash the app</p>
+      <p>{title}</p>
+      { icon && iconPosition == "right" && (
+        <p>{icon}</p>
+      )}
       
     </button>
   )

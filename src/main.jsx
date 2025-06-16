@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 
-import { ErrorBoundary } from "./components/error-boundary/ErrorBoundary.jsx";
+import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary.jsx";
 
 import { ErrorHandlerProvider } from "./context/ErrorHandlerProvider.jsx";
 import ThemeProvider from "./context/ThemeProvider.jsx";

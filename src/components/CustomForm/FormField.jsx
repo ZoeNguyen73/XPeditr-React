@@ -68,11 +68,11 @@ const FormField = ({
   
   return (
     <div
-      className={cn("flex flex-col gap-1", fullWidth && "w-full", className)}
+      className={cn("flex flex-row gap-2 items-center", fullWidth && "w-full", className)}
     >
 
       { label && (
-        <label htmlFor={name} className="font-sans tracking-wide text-sm text-yellow font-thin">
+        <label htmlFor={name} className="font-sans tracking-wide text-base text-yellow">
           {label}
           {required && <span className="text-red ml-1">*</span>}
         </label>
@@ -86,7 +86,7 @@ const FormField = ({
             : "border-gray focus-within:border-blue",
           disabled && "bg-gray cursor-not-allowed opacity-50",
           sizeStyles[size],
-          fullWidth & "w-full"
+          fullWidth && "w-full"
         )}
       >
         {renderInput()}
@@ -102,9 +102,9 @@ const FormField = ({
           </button>
         )}
 
-        {Icon && iconPosition === "right" && !isPassword && (
+        {/* {icon && iconPosition === "right" && !isPassword && (
           <Icon className="absolute right-3 h-4 w-4 text-gray-400 pointer-events-none" />
-        )}
+        )} */}
 
       </div>
       

@@ -44,6 +44,10 @@
   --color-btn-danger-hover: var(--btn-danger-hover);
   --color-btn-danger-text: var(--btn-danger-text);
   --color-btn-danger-border: var(--btn-danger-border);
+  --color-btn-disabled-bg: var(--btn-disabled-bg);
+  --color-btn-disabled-hover: var(--btn-disabled-hover);
+  --color-btn-disabled-text: var(--btn-disabled-text);
+  --color-btn-disabled-border: var(--btn-disabled-border);
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -93,6 +97,10 @@
   --btn-danger-hover: #DE555540;
   --btn-danger-text: #DE5550;
   --btn-danger-border: #522e2a;
+  --btn-disabled-bg: #A39E98;
+  --btn-disabled-hover: #615d59;
+  --btn-disabled-text: #31302e;
+  --btn-disabled-border: "transparent";
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -138,6 +146,10 @@
   --btn-danger-hover: #DE555540;
   --btn-danger-text: #DE5550;
   --btn-danger-border: #522e2a;
+  --btn-disabled-bg: #A39E98;
+  --btn-disabled-hover: #615d59;
+  --btn-disabled-text: #31302e;
+  --btn-disabled-border: "transparent";
 }
 
 a {

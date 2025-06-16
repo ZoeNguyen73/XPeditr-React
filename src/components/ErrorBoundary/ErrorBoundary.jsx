@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import Button from "../CustomButton/CustomButton";
+
 export class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -31,12 +33,14 @@ export class ErrorBoundary extends React.Component {
             We're sorry — an unexpected error occurred. Please try refreshing the page or come back later.
           </p>
 
-          <button
-            onClick={this.handleReload}
-            className="bg-bg-blue dark:bg-dark-bg-blue hover:bg-blue-700 text-blue dark:text-dark-blue font-sans tracking-wider font-semibold py-2 px-4 rounded"
-          >
-            Refresh the page
-          </button>
+          <Button 
+            handlePress={() => this.handleReload()}
+            variant="secondary"
+            title="Refresh the page"
+            size="lg"
+            icon="🔄"
+            iconPosition="right"
+          />
 
           {/* <Link
             to="/"

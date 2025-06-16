@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
-import SiteHeader from "./components/site-header/SiteHeader";
+import SiteHeader from "./components/SiteHeader/SiteHeader";
+import Button from "./components/CustomButton/CustomButton";
 
 function App() {
 
@@ -20,12 +21,18 @@ function App() {
       {/* 🚨 Crash Test Button (dev only) */}
       {import.meta.env.DEV && (
         <div className="p-4">
-          <button-default
+          {/* <button
             onClick={() => setCrash(true)}
             className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded"
           >
             Crash the App
-          </button-default>
+          </button> */}
+          <Button 
+            handlePress={() => setCrash(true)}
+            title="Crash the app"
+            icon="🚨"
+            // isLoading={true}
+          />
         </div>
       )}
       

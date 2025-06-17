@@ -11,18 +11,23 @@ const handleGlobalError = (error, handleFormError) => {
       details = "Please try again.";
     }
 
+    console.log("error details: " + details);
+    console.log(`error status === 400: ${status === 400}`);
+    console.log("has handleFormError: " + handleFormError);
+
     if (
       handleFormError &&
       (status === 400 || status === 401)
     ) {
       if (details.includes("username")) {
-        handleFormError("username", details);
+        handleFormError(details, "username");
       } else if (details.includes("email")) {
-        handleFormError("email", details);
+        handleFormError(details, "email");
       } else if (details.includes("password")) {
-        handleFormError("password", details);
+        handleFormError(details, "password");
       } else {
         // to include toast or popup modal here
+        console.log("toast message should be displayed here...");
         toast.error(`${message}: ${details}`);
       }
     } else {

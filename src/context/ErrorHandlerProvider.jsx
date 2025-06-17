@@ -12,7 +12,8 @@ export const ErrorHandlerProvider = ({ children }) => {
 
   const handleError = async (error, handleFormError) => {
     try {
-
+      if (error.response) console.log("error response received: " + JSON.stringify(error.response?.data));
+      if (error.request) console.log("error request received: " + JSON.stringify(error.request?.data));
       
       if (
         // handle session expired i.e. refresh token already expired

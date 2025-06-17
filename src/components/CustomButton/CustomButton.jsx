@@ -23,7 +23,7 @@ const Button = ({
   title,
   icon,
   handlePress,
-  containerStyles,
+  containerStyles="",
   variant = "primary",
   size = "md",
   isLoading = false,
@@ -33,27 +33,30 @@ const Button = ({
 }) => {
   
   return (
-    <button
-      className ={cn(
-        baseStyles,
-        variantStyles[variant],
-        sizeStyles[size],
-        fullWidth && "w-full",
-      )}
+    <div className={containerStyles}>
+      <button
+        className ={cn(
+          baseStyles,
+          variantStyles[variant],
+          sizeStyles[size],
+          fullWidth && "w-full",
+        )}
 
-      disabled={disabled||isLoading}
-      onClick={handlePress}
-      {...props}
-    >
-      { icon && !isLoading && (
-        <p>{icon}</p>
-      )}
-      { isLoading && (
-        <LoaderCircle className="animate-spin h-4 w-4 mr-2" />
-      )}
-      <p>{title}</p>
-      
-    </button>
+        disabled={disabled||isLoading}
+        onClick={handlePress}
+        {...props}
+      >
+        { icon && !isLoading && (
+          <p>{icon}</p>
+        )}
+        { isLoading && (
+          <LoaderCircle className="animate-spin h-4 w-4 mr-2" />
+        )}
+        <p>{title}</p>
+        
+      </button>
+    </div>
+    
   )
 };
 

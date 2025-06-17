@@ -85,11 +85,12 @@ const Register = () => {
     }
   };
 
+  // TO DO: initiateLogOut function
   const initiateLogOut = async () => {
 
   };
 
-  // handle case where user has already logged in & go to register page
+  // TO DO: handle case where user has already logged in & go to register page
   if (!isLoading && isLoggedIn && auth.username) {
     return (
       <div>
@@ -117,22 +118,44 @@ const Register = () => {
       </div>
 
       <div className="px-10 py-15 flex-1">
-        <p className="text-4xl text-yellow font-accent tracking-wide font-medium"> 
-          Create a hero profile  
-        </p>
-        <p className="text-5xl text-yellow font-accent tracking-wide font-medium mt-5"> 
-          🌟  
-        </p>
-
+        { !showSuccessMessage && (
+          <>
+            <p className="text-4xl text-yellow font-accent tracking-wide font-medium"> 
+              Account created!
+            </p>
+            <p className="text-5xl text-yellow font-accent tracking-wide font-medium mt-5"> 
+              💪  
+            </p>
+          </>
+          
+        )}
 
         { showSuccessMessage && (
-          <div>
-            <p>Account created, pending activation</p>
-            <p>activate token: {activateToken}</p>
-          </div>
+          <>
+            <p className="text-4xl text-yellow font-accent tracking-wide font-medium"> 
+              Create a hero profile  
+            </p>
+            <p className="text-5xl text-yellow font-accent tracking-wide font-medium mt-5"> 
+              🌟  
+            </p>
+          </>
         )}
 
         { !showSuccessMessage && (
+          <div className="mt-7 px-3 py-3 rounded-lg text-green font-sans tracking-wide">
+            <p className="font-bold">Nicely done!</p> 
+            <p>Let's activate your profile and get started</p>
+            {/* <p>activate token: {activateToken}</p> */}
+            <Button 
+              title="Activate"
+              size="lg"
+              containerStyles="mt-5"
+              handlePress={()=>{}}
+            />
+          </div>
+        )}
+
+        { showSuccessMessage && (
           <>
             <div className="flex-row mt-7 px-3">
               <FormField 

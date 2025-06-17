@@ -6,6 +6,7 @@ import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
 
 import Register from "./pages/Register";
+import Activate from "./pages/Activate";
 import Home from "./pages/Home";
 
 function App() {
@@ -17,6 +18,15 @@ function App() {
         element={
           <AuthLayout>
             <Register />
+          </AuthLayout>
+        }
+      />
+
+      <Route 
+        path="users/activate/:activateToken"
+        element={
+          <AuthLayout>
+            <Activate />
           </AuthLayout>
         }
       />

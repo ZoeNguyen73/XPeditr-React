@@ -11,6 +11,7 @@ import images from "../constants/images";
 
 import FormField from "../components/CustomForm/FormField";
 import Button from "../components/CustomButton/CustomButton";
+import AvatarSelector from "../components/Avatar/AvatarSelector";
 
 const Activate = () => {
   const params = useParams();
@@ -27,7 +28,7 @@ const Activate = () => {
 
   const [ form, setForm ] = useState({
     username: "",
-    avatar: "",
+    avatar: "1a",
   });
 
   const handleFormError = (errorMessage, input) => {
@@ -39,6 +40,10 @@ const Activate = () => {
     handleFormError(null, name);
     setForm((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleAvatarChange = (avatarName) => {
+    setForm((prev) => ({...prev, avatar: avatarName}))
+  }
 
   // activate account using the activateToken upon landing on the page
   useEffect(() => {
@@ -80,23 +85,23 @@ const Activate = () => {
 
       { !isLoading && (
         <div>
-          <div className="flex flex-col justify-center items-center">
-            <p className="text-4xl font-accent tracking-wider font-medium text-yellow">Account activated successfully!</p>
+          <div className="relative flex justify-center items-start">
             <img src={images["knight_crouchwalk_gif"]} className="w-50 h-auto" />
+            <p className="absolute top-0 text-4xl font-accent tracking-wider font-medium text-yellow">
+              Account activated successfully!
+            </p>
           </div>
           
-          
           {/* { needsProfileUpdate && ( */}
-            <div className="mt-10">
+            <div className="mt-5 flex flex-col items-center justify-center">
               <p className="text-lg font-sans tracking-wider text-blue font-medium">
                 One last step before we get started
               </p>
-              
-              <p className="mt-5 text-gray font-sans tracking-wider text-sm">
-                Choose your username
-              </p>
 
               <div className="px-5">
+                <p className="mt-5 mb-2 text-gray font-sans tracking-wider text-sm">
+                  Choose your username
+                </p>
                 <FormField 
                   name="username"
                   value={form.username}
@@ -109,8 +114,25 @@ const Activate = () => {
                 />
               </div>
 
-              <p className="mt-5 text-gray font-sans tracking-wider text-sm">Choose your avatar</p>
+              <p className="mt-7 text-gray font-sans tracking-wider text-sm">
+                Choose your avatar
+              </p>
+              <p className="mb-4 text-xs font-italic font-sans text-gray">
+                You can change your avatar later under profile settings
+              </p>
+              <AvatarSelector 
+                containerStyles="max-w-3/4 justify-center gap-2"
+                selectedAvatar={form.avatar}
+                setSelectedAvatar={handleAvatarChange}
+              />
+
+              <Button 
+                title="Confirm"
+                containerStyles="mt-10"
+                size="lg"
+              />
             </div>
+
           {/* )} */}
 
         </div>

@@ -1,5 +1,123 @@
-const Activate = () => {
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
+import { useAuthContext } from "../context/AuthProvider";
+import { useErrorHandler } from "../context/ErrorHandlerProvider";
+
+import axios from "../api/axios";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import storage from "../utils/Storage";
+import images from "../constants/images";
+
+import FormField from "../components/CustomForm/FormField";
+import Button from "../components/CustomButton/CustomButton";
+
+const Activate = () => {
+  const params = useParams();
+  const activateToken = params.activateToken;
+
+  const { setAuth, setIsLoggedIn } = useAuthContext();
+  const { handleError } = useErrorHandler();
+
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ username, setUsername ] = useState("");
+  const [ needsProfileUpdate, setNeedsProfileUpdate ] = useState(false);
+  const [ selectedAvatar, setSelectedAvatar] = useState("");
+  const [formErrors, setFormErrors] = useState({});
+
+  const [ form, setForm ] = useState({
+    username: "",
+    avatar: "",
+  });
+
+  const handleFormError = (errorMessage, input) => {
+    setFormErrors(prev => ( {...prev, [input]: errorMessage} ));
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    handleFormError(null, name);
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  // activate account using the activateToken upon landing on the page
+  useEffect(() => {
+    const activate = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.post(`auth/activate?token=${activateToken}`);
+        const { user, avatar, accessToken, refreshToken } = response.data;
+        
+        storage.setItem("username", username);
+        storage.setItem("avatar", avatar);
+        storage.setItem("accessToken", accessToken);
+        storage.setItem("refreshToken", refreshToken);
+
+        // setUsername(user.username);
+        // setSelectedAvatar(user.avatar);
+        setForm(prev => ({ ...prev, username: username, avatar: avatar}));
+        setNeedsProfileUpdate(user.needs_profile_update);
+
+        setAuth({ username: user.username, avatar: user.avatar, accessToken });
+        setIsLoggedIn(true);
+
+      } catch (error) {
+        handleError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    // activate();
+
+  }, [])
+
+  return (
+    <div>
+      { isLoading && (
+        <p className="text-4xl font-accent tracking-wider font-medium text-yellow">Account activation in process...</p>
+      )}
+
+      { !isLoading && (
+        <div>
+          <div className="flex flex-col justify-center items-center">
+            <p className="text-4xl font-accent tracking-wider font-medium text-yellow">Account activated successfully!</p>
+            <img src={images["knight_crouchwalk_gif"]} className="w-50 h-auto" />
+          </div>
+          
+          
+          {/* { needsProfileUpdate && ( */}
+            <div className="mt-10">
+              <p className="text-lg font-sans tracking-wider text-blue font-medium">
+                One last step before we get started
+              </p>
+              
+              <p className="mt-5 text-gray font-sans tracking-wider text-sm">
+                Choose your username
+              </p>
+
+              <div className="px-5">
+                <FormField 
+                  name="username"
+                  value={form.username}
+                  onChange={handleInputChange}
+                  error={formErrors.username}
+                  required={true}
+                  className="mb-3 items-center"
+                  fullWidth={true}
+                  centerAlign={true}
+                />
+              </div>
+
+              <p className="mt-5 text-gray font-sans tracking-wider text-sm">Choose your avatar</p>
+            </div>
+          {/* )} */}
+
+        </div>
+      )}
+    </div>
+    
+  )
 };
 
 export default Activate;

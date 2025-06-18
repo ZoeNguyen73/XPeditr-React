@@ -11,7 +11,7 @@ const sizeStyles = {
 };
 
 const FormField = ({
-  label,
+  label="",
   name,
   type = "text",
   value,
@@ -24,6 +24,7 @@ const FormField = ({
   readOnly = false,
   size = "md",
   fullWidth = false,
+  centerAlign = false,
   className = "",
   multiline= false,
   rows = 4,
@@ -62,7 +63,7 @@ const FormField = ({
       )
     }
 
-    return <input type={inputType} {...commonProps} />
+    return <input type={inputType} {...commonProps} className={cn(baseClass, centerAlign ? "text-center" : "")} />
 
   };
   

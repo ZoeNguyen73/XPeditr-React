@@ -23,7 +23,7 @@ function App() {
       />
 
       <Route 
-        path="users/activate/:activateToken"
+        path="/activate/:activateToken"
         element={
           <AuthLayout>
             <Activate />

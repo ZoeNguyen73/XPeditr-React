@@ -54,7 +54,6 @@ const Register = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-
   const validate = async () => {
     let isValid = true;
 
@@ -118,7 +117,7 @@ const Register = () => {
       </div>
 
       <div className="px-10 py-15 flex-1">
-        { !showSuccessMessage && (
+        { showSuccessMessage && (
           <>
             <p className="text-4xl text-yellow font-accent tracking-wide font-medium"> 
               Account created!
@@ -130,7 +129,7 @@ const Register = () => {
           
         )}
 
-        { showSuccessMessage && (
+        { !showSuccessMessage && (
           <>
             <p className="text-4xl text-yellow font-accent tracking-wide font-medium"> 
               Create a hero profile  
@@ -141,7 +140,7 @@ const Register = () => {
           </>
         )}
 
-        { !showSuccessMessage && (
+        { showSuccessMessage && (
           <div className="mt-7 px-3 py-3 rounded-lg text-green font-sans tracking-wide">
             <p className="font-bold">Nicely done!</p> 
             <p>Let's activate your profile and get started</p>
@@ -155,7 +154,7 @@ const Register = () => {
           </div>
         )}
 
-        { showSuccessMessage && (
+        { !showSuccessMessage && (
           <>
             <div className="flex-row mt-7 px-3">
               <FormField 

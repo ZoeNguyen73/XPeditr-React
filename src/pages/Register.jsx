@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import FormField from "../components/CustomForm/FormField";
 import Button from "../components/CustomButton/CustomButton";
@@ -12,6 +13,7 @@ import images from "../constants/images";
 const Register = () => {
   const { auth, isLoading, isLoggedIn } = useAuthContext();
   const { handleError } = useErrorHandler();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     email: "",
@@ -23,6 +25,7 @@ const Register = () => {
   const [formErrors, setFormErrors] = useState({});
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [activateToken, setActivateToken] = useState("");
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const register = async () => {
     setIsSubmitting(true);
@@ -82,6 +85,13 @@ const Register = () => {
     if (isValid) {
       await register();
     }
+  };
+
+  const handleActivateButtonClick = () => {
+    setIsRedirecting(true);
+    setTimeout(() => {
+      navigate(`/activate/${activateToken}`);
+    }, 1000);
   };
 
   // TO DO: initiateLogOut function
@@ -144,12 +154,12 @@ const Register = () => {
           <div className="mt-7 px-3 py-3 rounded-lg text-green font-sans tracking-wide">
             <p className="font-bold">Nicely done!</p> 
             <p>Let's activate your profile and get started</p>
-            {/* <p>activate token: {activateToken}</p> */}
             <Button 
               title="Activate"
               size="lg"
               containerStyles="mt-5"
-              handlePress={()=>{}}
+              handlePress={handleActivateButtonClick}
+              isLoading={isRedirecting}
             />
           </div>
         )}

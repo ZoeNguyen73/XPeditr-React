@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { useAuthContext } from "../context/AuthProvider";
 import { useErrorHandler } from "../context/ErrorHandlerProvider";
@@ -17,13 +18,14 @@ const Activate = () => {
   const params = useParams();
   const activateToken = params.activateToken;
 
-  const { setAuth, setIsLoggedIn } = useAuthContext();
+  const { auth, setAuth, setIsLoggedIn } = useAuthContext();
   const { handleError } = useErrorHandler();
+  const axiosPrivate = useAxiosPrivate();
 
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ isSubmitting, setIsSubmitting ] = useState(false);
   const [ username, setUsername ] = useState("");
   const [ needsProfileUpdate, setNeedsProfileUpdate ] = useState(false);
-  const [ selectedAvatar, setSelectedAvatar] = useState("");
   const [formErrors, setFormErrors] = useState({});
 
   const [ form, setForm ] = useState({
@@ -43,7 +45,25 @@ const Activate = () => {
 
   const handleAvatarChange = (avatarName) => {
     setForm((prev) => ({...prev, avatar: avatarName}))
-  }
+  };
+
+  const submitForm = async () => {
+    try {
+      setIsSubmitting(true);
+      const newUsername = form.username;
+      const newAvatar = form.avatar;
+      const response = await axiosPrivate.put(
+        `users/${auth.username}`,
+        { username: newUsername, avatar: newAvatar, needs_profile_update: false }
+      );
+      toast("Account successfully updated");
+
+    } catch (error) {
+      handleError(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // activate account using the activateToken upon landing on the page
   useEffect(() => {
@@ -126,10 +146,12 @@ const Activate = () => {
                 setSelectedAvatar={handleAvatarChange}
               />
 
-              <Button 
+              <Button
+                handlePress={submitForm} 
                 title="Confirm"
                 containerStyles="mt-10"
                 size="lg"
+                isLoading={isSubmitting}
               />
             </div>
 

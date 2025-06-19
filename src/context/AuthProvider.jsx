@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       setAuth({ username, accessToken, avatar });
       setIsLoggedIn(true);
     } catch (error) {
-      handleGlobalError(error);
+      throw error;
     } finally {
       setIsLoading(false);
     }
@@ -50,21 +50,25 @@ export const AuthProvider = ({ children }) => {
         "/auth/logout",
         { data: { refreshToken }}
       );
+      console.log("[AuthContext] refreshtoken deleted");
 
       storage.removeItem("username");
       storage.removeItem("accessToken");
       storage.removeItem("refreshToken");
       storage.removeItem("avatar");
+      console.log("[AuthContext] storage cleared");
 
       setAuth({
         username: "",
         accessToken: "",
         avatar: "",
       });
+      console.log("[AuthContext] auth cleared");
+
       setIsLoggedIn(false);
 
     } catch (error) {
-      handleGlobalError(error);
+      throw error;
 
     } finally {
       setIsLoading(false);

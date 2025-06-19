@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -7,6 +7,7 @@ import { useErrorHandler } from "../context/ErrorHandlerProvider";
 
 import axios from "../api/axios";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useOneTimeEffect from "../hooks/useOneTimeEffect";
 import storage from "../utils/Storage";
 import images from "../constants/images";
 
@@ -23,14 +24,15 @@ const Activate = () => {
   const axiosPrivate = useAxiosPrivate();
 
   const [ isLoading, setIsLoading ] = useState(false);
+  const [ activationSuccessful, setActivationSuccessful ] = useState(false);
   const [ isSubmitting, setIsSubmitting ] = useState(false);
-  const [ username, setUsername ] = useState("");
+  const [ defaultUsername, setDefaultUsername ] = useState("");
   const [ needsProfileUpdate, setNeedsProfileUpdate ] = useState(false);
   const [formErrors, setFormErrors] = useState({});
 
   const [ form, setForm ] = useState({
     username: "",
-    avatar: "1a",
+    avatar: "",
   });
 
   const handleFormError = (errorMessage, input) => {
@@ -52,8 +54,11 @@ const Activate = () => {
       setIsSubmitting(true);
       const newUsername = form.username;
       const newAvatar = form.avatar;
+
+      console.log("auth: " + JSON.stringify(auth));
+      
       const response = await axiosPrivate.put(
-        `users/${auth.username}`,
+        `users/${defaultUsername}`,
         { username: newUsername, avatar: newAvatar, needs_profile_update: false }
       );
       toast("Account successfully updated");
@@ -66,26 +71,30 @@ const Activate = () => {
   };
 
   // activate account using the activateToken upon landing on the page
-  useEffect(() => {
+  // using useOneTimeEffect hook to ensure the activation is not done twice
+  useOneTimeEffect(() => {
     const activate = async () => {
       try {
         setIsLoading(true);
         const response = await axios.post(`auth/activate?token=${activateToken}`);
-        const { user, avatar, accessToken, refreshToken } = response.data;
-        
+        const { user, accessToken, refreshToken } = response.data;
+        const { username, avatar, needs_profile_update } = user;
+        console.log("activate response: " + JSON.stringify(response.data));
+
+        // Persist tokens and user info
         storage.setItem("username", username);
         storage.setItem("avatar", avatar);
         storage.setItem("accessToken", accessToken);
         storage.setItem("refreshToken", refreshToken);
 
-        // setUsername(user.username);
-        // setSelectedAvatar(user.avatar);
-        setForm(prev => ({ ...prev, username: username, avatar: avatar}));
-        setNeedsProfileUpdate(user.needs_profile_update);
+        // Update frontend state
+        setDefaultUsername(username);
+        setForm(prev => ({ ...prev, username: username, avatar: avatar }));
+        setNeedsProfileUpdate(needs_profile_update);
 
-        setAuth({ username: user.username, avatar: user.avatar, accessToken });
+        setAuth({ username: username, avatar: avatar, accessToken });
         setIsLoggedIn(true);
-
+        setActivationSuccessful(true);
       } catch (error) {
         handleError(error);
       } finally {
@@ -93,9 +102,8 @@ const Activate = () => {
       }
     };
 
-    // activate();
-
-  }, [])
+    activate(); // run the activation once
+  }, []);
 
   return (
     <div>
@@ -103,7 +111,15 @@ const Activate = () => {
         <p className="text-4xl font-accent tracking-wider font-medium text-yellow">Account activation in process...</p>
       )}
 
-      { !isLoading && (
+      { !isLoading && !activationSuccessful && (
+        <div>
+          <p className="absolute top-0 text-4xl font-accent tracking-wider font-medium text-yellow">
+            Account Activation failed
+          </p>
+        </div>
+      )}
+
+      { !isLoading && activationSuccessful && (
         <div>
           <div className="relative flex justify-center items-start">
             <img src={images["knight_crouchwalk_gif"]} className="w-50 h-auto" />
@@ -112,7 +128,7 @@ const Activate = () => {
             </p>
           </div>
           
-          {/* { needsProfileUpdate && ( */}
+          { needsProfileUpdate && (
             <div className="mt-5 flex flex-col items-center justify-center">
               <p className="text-lg font-sans tracking-wider text-blue font-medium">
                 One last step before we get started
@@ -155,7 +171,7 @@ const Activate = () => {
               />
             </div>
 
-          {/* )} */}
+          )}
 
         </div>
       )}

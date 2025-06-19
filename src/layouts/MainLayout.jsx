@@ -11,22 +11,8 @@ const MainLayout = ({ children }) => {
   }
 
   return (
-    <div className="bg-background h-screen w-screen">
-      <SiteHeader />
-
-      {/* 🚨 Crash Test Button (dev only) */}
-      {import.meta.env.DEV && (
-        <div className="p-4">
-          <Button
-            handlePress={() => setCrash(true)}
-            title="Crash the app"
-            icon="🚨"
-          />
-        </div>
-      )}
-
+    <div className="bg-background min-h-screen w-screen">
       {children}
-
     </div>
   );
 };

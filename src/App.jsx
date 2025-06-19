@@ -5,9 +5,13 @@ import "./App.css";
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
 
+// auth pages
 import Register from "./pages/Register";
 import Activate from "./pages/Activate";
+import ProfileSetup from "./pages/ProfileSetup";
+
 import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
 
@@ -28,6 +32,24 @@ function App() {
           <AuthLayout>
             <Activate />
           </AuthLayout>
+        }
+      />
+      
+      <Route 
+        path="/profile-setup"
+        element={
+          <AuthLayout>
+            <ProfileSetup />
+          </AuthLayout>
+        }
+      />
+
+      <Route
+        path="/dashboard"
+        element={
+          <MainLayout>
+            <Dashboard />
+          </MainLayout>
         }
       />
 

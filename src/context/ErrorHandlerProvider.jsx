@@ -14,7 +14,7 @@ export const ErrorHandlerProvider = ({ children }) => {
     try {
       if (error.response) console.log("error response received: " + JSON.stringify(error.response?.data));
       if (error.request) console.log("error request received: " + JSON.stringify(error.request?.data));
-      
+      console.log("unknown error received: " + JSON.stringify(error));
       if (
         // handle session expired i.e. refresh token already expired
         error.response?.data?.details === "Unable to verify refresh token" &&
@@ -29,12 +29,12 @@ export const ErrorHandlerProvider = ({ children }) => {
         // also clear local storage/session storage
 
       } else {
-        handleGlobalError(error, handleFormError);
+        return handleGlobalError(error, handleFormError);
         
       }
     } catch (e) {
       console.error(e);
-      handleGlobalError(e);
+      return handleGlobalError(e);
     }
     
   };

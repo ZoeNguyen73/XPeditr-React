@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import FormField from "../components/CustomForm/FormField";
 import Button from "../components/CustomButton/CustomButton";
+import MessageBox from "../components/MessageBox";
 
 import { useAuthContext } from "../context/AuthProvider";
 import { useErrorHandler } from "../context/ErrorHandlerProvider";
@@ -26,20 +27,26 @@ const Register = () => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [activateToken, setActivateToken] = useState("");
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const [showMessageBox, setShowMessageBox] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const register = async () => {
     setIsSubmitting(true);
+    setShowMessageBox(false);
 
     try {
       const { email, password, confirm_password } = form;
       const response = await axios.post("auth/register", { email, password, confirm_password });
-      console.log(JSON.stringify(response));
 
       setActivateToken(response.data.activateToken);
       setShowSuccessMessage(true);
 
     } catch (error) {
-      await handleError(error, handleFormError);
+      const parsedError = await handleError(error, handleFormError);
+      if (parsedError && parsedError?.type !== "form") {
+        setErrorMessage(`${parsedError.message}. ${parsedError.details}`);
+        setShowMessageBox(true);
+      }
 
     } finally {
       setIsSubmitting(false);
@@ -47,7 +54,6 @@ const Register = () => {
   };
 
   const handleFormError = (errorMesssage, input) => {
-    console.log("handleFormError triggering for " + input + " with message " + errorMesssage);
     setFormErrors(prev => ( {...prev, [input]: errorMesssage} ));
   };
 
@@ -137,6 +143,10 @@ const Register = () => {
             </p>
           </>
           
+        )}
+
+        { showMessageBox && errorMessage && (
+          <MessageBox content={errorMessage} type="error" />
         )}
 
         { !showSuccessMessage && (

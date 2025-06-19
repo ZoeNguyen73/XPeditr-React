@@ -80,6 +80,7 @@ export const AuthProvider = ({ children }) => {
         const currentAvatar = storage.getItem("avatar");
 
         if (!currentUsername || !currentAccessToken || !currentRefreshToken || !currentAvatar) {
+          console.log("[AuthContext] Insufficient auth details from storage...");
           setAuth({
             username: "",
             accessToken: "",
@@ -87,6 +88,7 @@ export const AuthProvider = ({ children }) => {
           });
           setIsLoggedIn(false);
         } else {
+          console.log("[AuthContext] auth details intialized from storage ...");
           setAuth({
             username: currentUsername,
             accessToken: currentAccessToken,
@@ -107,7 +109,7 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ logIn, logOut, auth, isLoggedIn, isLoading }}>
+    <AuthContext.Provider value={{ logIn, logOut, setAuth, setIsLoggedIn, auth, isLoggedIn, isLoading }}>
       {children}
     </AuthContext.Provider>
   )

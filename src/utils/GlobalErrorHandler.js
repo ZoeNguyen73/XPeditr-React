@@ -1,43 +1,68 @@
 import { toast } from "react-hot-toast";
 
-const handleGlobalError = (error, handleFormError) => {
-  if (error.response) {
+/**
+ * Handles API/global errors and optionally passes form field errors to a callback.
+ * If no form handler is provided, it returns a parsed error object to the caller.
+ *
+ * @param {Error} error - Axios error object
+ * @param {Function} [handleFormError] - Optional callback to handle specific form field errors
+ * @returns {Object|undefined} Returns parsed error if `handleFormError` not provided
+ */
 
+const handleGlobalError = (error, handleFormError) => {
+  let status = 0;
+  let message = "An error occurred";
+  let details = "Please try again.";
+  let type = "unknown";
+
+  if (error?.response) {
+    type = "response";
     const status = error.response.status;
-    const message = error.response.data.message || "An error occurred";
-    let details = error.response.data.details || "Please try again.";
+    const message = error.response.data.message || message;
+    let details = error.response.data.details || details;
+
+    // Normalize details to string
+    if (Array.isArray(details)) {
+      details = details.join(" ");
+    } else if (typeof details !== "string") {
+      details = "Please try again.";
+    }
 
     if (typeof details !== "string") {
       details = "Please try again.";
     }
 
-    if (
-      handleFormError &&
-      (status === 400 || status === 401)
-    ) {
+    console.log("error details: " + details);
+    console.log(`error status === 400: ${status === 400}`);
+    console.log("has handleFormError: " + handleFormError);
+
+    // handle form errors by field
+    if (handleFormError && (status === 400 || status === 401)) {
+      type = "form";
       if (details.includes("username")) {
-        handleFormError("username", details);
+        handleFormError(details, "username");
       } else if (details.includes("email")) {
-        handleFormError("email", details);
+        handleFormError(details, "email");
       } else if (details.includes("password")) {
-        handleFormError("password", details);
+        handleFormError(details, "password");
       } else {
-        // to include toast or popup modal here
-        toast.error(`${message}: ${details}`);
+        type = "unknown";
+        message = "Unknown form error";
       }
-    } else {
-      // to include toast or popup modal here
-      toast.error(`${message}: ${details}`);
     }
 
-  } else if (error.request) {
-    // to include toast or popup modal here
-    toast.error("No response from server. Please check your internet.");
+  } else if (error?.request) {
+    type = "request";
+    message = "No response from server";
+    details = "Please check your internet connection.";
 
   } else {
-    // to include toast or popup modal here
-    toast.error("No response from server. Please check your internet.");
+    type = "unknown";
+    message = "Unexpected error";
+    details = "Something went wrong. Please try again.";
   }
+
+  return { type, status, message, details };
 
 };
 

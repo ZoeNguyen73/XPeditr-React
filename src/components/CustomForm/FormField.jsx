@@ -11,7 +11,7 @@ const sizeStyles = {
 };
 
 const FormField = ({
-  label,
+  label="",
   name,
   type = "text",
   value,
@@ -24,6 +24,7 @@ const FormField = ({
   readOnly = false,
   size = "md",
   fullWidth = false,
+  centerAlign = false,
   className = "",
   multiline= false,
   rows = 4,
@@ -62,67 +63,65 @@ const FormField = ({
       )
     }
 
-    return <input type={inputType} {...commonProps} />
+    return <input type={inputType} {...commonProps} className={cn(baseClass, centerAlign ? "text-center" : "")} />
 
   };
   
   return (
-    <div
-      className={cn("flex flex-col gap-1", fullWidth && "w-full", className)}
-    >
-
-      { label && (
-        <label htmlFor={name} className="font-sans tracking-wide text-sm text-yellow font-thin">
-          {label}
-          {required && <span className="text-red ml-1">*</span>}
-        </label>
-      )}
-
+    <div className={cn("flex-col", fullWidth && "w-full", className)}>
       <div
-        className={cn(
-          "relative flex items-center border rounded-xl transition-all",
-          error
-            ? "border-red focus-within:border-red"
-            : "border-gray focus-within:border-blue",
-          disabled && "bg-gray cursor-not-allowed opacity-50",
-          sizeStyles[size],
-          fullWidth & "w-full"
-        )}
+        className={cn("flex flex-row gap-2 items-center")}
       >
-        {renderInput()}
 
-        {isPassword && (
-          <button
-            type="button"
-            onClick={() => setShowPassword(prev => !prev)}
-            className="absolute right-3 text-gray-400 hover:text-gray-600 focus:outline-none"
-            tabIndex={-1}
-          >
-            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-          </button>
+        { label && (
+          <label htmlFor={name} className="font-sans tracking-wide text-base text-yellow">
+            {label}
+            {required && <span className="text-red ml-1">*</span>}
+          </label>
         )}
 
-        {Icon && iconPosition === "right" && !isPassword && (
-          <Icon className="absolute right-3 h-4 w-4 text-gray-400 pointer-events-none" />
-        )}
+        <div
+          className={cn(
+            "relative flex items-center border rounded-xl transition-all",
+            error
+              ? "border-red focus-within:border-red"
+              : "border-gray focus-within:border-blue",
+            disabled && "bg-gray cursor-not-allowed opacity-50",
+            sizeStyles[size],
+            fullWidth && "w-full"
+          )}
+        >
+          {renderInput()}
 
+          {isPassword && (
+            <button
+              type="button"
+              onClick={() => setShowPassword(prev => !prev)}
+              className="absolute right-3 text-gray-400 hover:text-gray-600 focus:outline-none"
+              tabIndex={-1}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          )}
+
+        </div>
       </div>
-      
-      <div className="flex justify-between">
-        {helperText && !error && (
-          <p className="text-xs font-italic font-sans text-gray">{helperText}</p>
-        )}
 
-        {error && <p className="text-xs font-sans font-italic text-red">{error}</p>}
+      <div className="flex justify-between mt-1">
+          {helperText && !error && (
+            <p className="text-xs font-italic font-sans text-gray">{helperText}</p>
+          )}
 
-        {/* Character counter */}
-        {maxLength && typeof value === "string" && (
-          <p className="text-xs font-sans font-italic text-gray ml-auto">{value.length}/{maxLength}</p>
-        )}
+          {error && <p className="text-xs font-sans font-italic text-red">{error}</p>}
 
-      </div>
-      
+          {/* Character counter */}
+          {maxLength && typeof value === "string" && (
+            <p className="text-xs font-sans font-italic text-gray ml-auto">{value.length}/{maxLength}</p>
+          )}
+
+        </div>
     </div>
+    
   )
 };
 

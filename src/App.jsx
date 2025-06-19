@@ -9,6 +9,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import Register from "./pages/Register";
 import Activate from "./pages/Activate";
 import ProfileSetup from "./pages/ProfileSetup";
+import LogIn from "./pages/LogIn";
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
@@ -40,6 +41,15 @@ function App() {
         element={
           <AuthLayout>
             <ProfileSetup />
+          </AuthLayout>
+        }
+      />
+
+      <Route 
+        path="/login"
+        element={
+          <AuthLayout>
+            <LogIn />
           </AuthLayout>
         }
       />

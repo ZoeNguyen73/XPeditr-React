@@ -229,7 +229,13 @@ const Register = () => {
                 isLoading={isSubmitting}
               />
               <p className="mt-2 text-sm text-gray tracking-wider">
-                Already has an account? Sign in here
+                Already has an account? 
+                <span
+                  className="ml-2 text-blue cursor-pointer font-bold hover:underline"
+                  onClick={() => navigate("/login")}
+                >
+                  Log in 
+                </span>
               </p>
             </div>
           </>

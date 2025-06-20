@@ -1,11 +1,63 @@
-import { FiSun, FiMoon } from "react-icons/fi";
-import { LuCircleHelp } from "react-icons/lu";
+import { FiSun, FiMoon } from "react-icons/fi";;
 
 import { useThemeContext } from "../../context/ThemeProvider";
 
 import Avatar from "../Avatar/Avatar";
+import StatDisplay from "../StatDisplay";
 
 import images from "../../constants/images";
+import icons from "../../constants/icons";
+
+const STATS_DATA = [
+  { 
+    code: "STR", 
+    description: { tooltip_text: "Power through challenges. Earn this when you hit the gym, go for a run, or push yourself physically!"}, 
+    icon: "💪", 
+    level: 4, 
+    totalPointToNextLevel: 200, 
+    thisLevelAccPoint: 180,
+  },
+  { 
+    code: "INT", 
+    description: { tooltip_text: "Sharpen your mind. Earn this by reading, studying, or learning something new!"}, 
+    icon: "🧠", 
+    level: 2, 
+    totalPointToNextLevel: 100, 
+    thisLevelAccPoint: 70,
+  },
+  { 
+    code: "WIS", 
+    description: { tooltip_text: "Think before you leap. Earn this when you slow down, reflect, or make mindful decisions."}, 
+    icon: "😌", 
+    level: 3, 
+    totalPointToNextLevel: 200, 
+    thisLevelAccPoint: 80,
+  },
+  { 
+    code: "CHA", 
+    description: { tooltip_text: "Farm aura and build confidence. Earn this when you connect, communicate, or put yourself out there!"}, 
+    icon: "💬", 
+    level: 1, 
+    totalPointToNextLevel: 100, 
+    thisLevelAccPoint: 90,
+  },
+  { 
+    code: "DEX", 
+    description: { tooltip_text: "Gain finesse and spring your ideas to life. Earn this by training your craft or building cool things!"}, 
+    icon: "🔧", 
+    level: 3, 
+    totalPointToNextLevel: 200, 
+    thisLevelAccPoint: 150,
+  },
+  { 
+    code: "VIT", 
+    description: { tooltip_text: "Stay energized and radiant. Earn this when you rest, refuel, or take care of your health!"}, 
+    icon: "🔮", 
+    level: 2, 
+    totalPointToNextLevel: 100, 
+    thisLevelAccPoint: 25,
+  },
+];
 
 const ProfileSideBar = () => {
   const { theme, toggleTheme } = useThemeContext();
@@ -28,7 +80,7 @@ const ProfileSideBar = () => {
       
       <button
         onClick={toggleTheme}
-        className="absolute top-3 right-3 p-2 rounded-full transition bg-background z-2 cursor-pointer"
+        className="absolute top-3 right-3 p-2 rounded-full transition bg-background z-2 cursor-pointer hover:border-2 border-blue"
         aria-label="Toggle Theme"
       >
         {theme === "dark" ? (
@@ -55,8 +107,8 @@ const ProfileSideBar = () => {
         </div>
 
         <div className="px-5 w-5/6 mt-1 relative h-3">
-          <div className="absolute z-3 left-0 rounded-full h-3 bg-yellow border-1 border-gray" style={{width: "65%"}}></div>
-          <div className="absolute z-2 left-0 rounded-full w-full h-3 border-1 border-gray"></div>
+          <div className="absolute z-3 left-0 rounded-full h-3 bg-yellow border-1 border-yellow" style={{width: "65%"}}></div>
+          <div className="absolute z-2 left-0 rounded-full w-full h-3 border-1 border-yellow"></div>
         </div>
         
         <div className="flex flex-row w-5/6 mt-8">
@@ -69,134 +121,21 @@ const ProfileSideBar = () => {
           <div className="flex-1"></div>
           <p className="text-sm text-text font-medium">20 days</p>
         </div>
-        <div className="flex flex-row w-5/6 mt-3">
-          <p className="text-sm">✅ Tasks done</p>
-          <div className="flex-1"></div>
-          <p className="text-sm text-text font-medium">6 / 10</p>
-        </div>
 
-        <div className="h-[1px] bg-gray w-5/6 mt-7 mb-7"></div>
+        <div className="h-[1px] bg-gray w-5/6 mt-7 mb-3"></div>
 
-        <div className="flex flex-row w-5/6">
-          <div className="flex-1 text-left h-full">
-            <p className="text-2xl">💪</p>
-          </div>
+        { STATS_DATA.length > 0 && (
+          STATS_DATA.map(stat => 
+            <StatDisplay id={stat.code} stat={stat} containerStyles="w-5/6 mt-4" />
+          )
+        )}
 
-          <div className="flex-5 flex flex-col text-right">
-            <div className="flex flex-row items-center">
-
-              <div className="flex flex-row items-center">
-                <p className="text-sm font-bold">STR</p>
-                <LuCircleHelp className="ml-1 h-4 w-4"/>
-              </div>
-              
-              <p className="flex-1 text-xs text-right">Level 4</p>
-            </div>
-            <div className="relative h-1 mt-1">
-              <div className="absolute z-3 left-0 rounded-full h-1 bg-gray-400 border-1 border-gray-400" style={{width: "45%"}}></div>
-              <div className="absolute z-2 left-0 rounded-full w-full h-1 bg-transparent border-1 border-gray-400"></div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-row w-5/6 mt-5">
-          <div className="flex-1 text-left h-full">
-            <p className="text-2xl">🧠</p>
-          </div>
-
-          <div className="flex-5 flex flex-col text-right">
-            <div className="flex flex-row items-center">
-              <div className="flex flex-row items-center">
-                <p className="text-sm font-bold">INT</p>
-                <LuCircleHelp className="ml-1 h-4 w-4"/>
-              </div>
-              <p className="flex-1 text-xs text-right">Level 2</p>
-            </div>
-            <div className="relative h-1 mt-1">
-              <div className="absolute z-3 left-0 rounded-full h-1 bg-gray-300 border-1 border-gray-400" style={{width: "55%"}}></div>
-              <div className="absolute z-2 left-0 rounded-full w-full h-1 bg-transparent border-1 border-gray-400y"></div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="flex flex-row w-5/6 mt-5">
-          <div className="flex-1 text-left h-full">
-            <p className="text-2xl">😌</p>
-          </div>
-
-          <div className="flex-5 flex flex-col text-right">
-            <div className="flex flex-row items-center">
-              <div className="flex flex-row items-center">
-                <p className="text-sm font-bold">WIS</p>
-                <LuCircleHelp className="ml-1 h-4 w-4"/>
-              </div>
-              <p className="flex-1 text-xs text-right">Level 3</p>
-            </div>
-            <div className="relative h-1 mt-1">
-              <div className="absolute z-3 left-0 rounded-full h-1 bg-gray-300 border-1 border-gray-400" style={{width: "90%"}}></div>
-              <div className="absolute z-2 left-0 rounded-full w-full h-1 bg-transparent border-1 border-gray-400"></div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-row w-5/6 mt-5">
-          <div className="flex-1 text-left h-full">
-            <p className="text-2xl">💬</p>
-          </div>
-
-          <div className="flex-5 flex flex-col text-right">
-            <div className="flex flex-row items-center">
-              <div className="flex flex-row items-center">
-                <p className="text-sm font-bold">CHA</p>
-                <LuCircleHelp className="ml-1 h-4 w-4"/>
-              </div>
-              <p className="flex-1 text-xs text-right">Level 1</p>
-            </div>
-            <div className="relative h-1 mt-1">
-              <div className="absolute z-3 left-0 rounded-full h-1 bg-gray-300 border-1 border-gray-400" style={{width: "85%"}}></div>
-              <div className="absolute z-2 left-0 rounded-full w-full h-1 bg-transparent border-1 border-gray-400"></div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-row w-5/6 mt-5">
-          <div className="flex-1 text-left h-full">
-            <p className="text-2xl">🔧</p>
-          </div>
-
-          <div className="flex-5 flex flex-col text-right">
-            <div className="flex flex-row items-center">
-              <div className="flex flex-row items-center">
-                <p className="text-sm font-bold">DEX</p>
-                <LuCircleHelp className="ml-1 h-4 w-4"/>
-              </div>
-              <p className="flex-1 text-xs text-right">Level 3</p>
-            </div>
-            <div className="relative h-1 mt-1">
-              <div className="absolute z-3 left-0 rounded-full h-1 bg-gray-300 border-1 border-gray-400" style={{width: "20%"}}></div>
-              <div className="absolute z-2 left-0 rounded-full w-full h-1 bg-transparent border-1 border-gray-400"></div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-row w-5/6 mt-5">
-          <div className="flex-1 text-left h-full">
-            <p className="text-2xl">🔮</p>
-          </div>
-
-          <div className="flex-5 flex flex-col text-right">
-            <div className="flex flex-row items-center">
-              <div className="flex flex-row items-center">
-                <p className="text-sm font-bold">VIT</p>
-                <LuCircleHelp className="ml-1 h-4 w-4"/>
-              </div>
-              <p className="flex-1 text-xs text-right">Level 2</p>
-            </div>
-            <div className="relative h-1 mt-1">
-              <div className="absolute z-3 left-0 rounded-full h-1 bg-gray-300 border-1 border-gray-400" style={{width: "35%"}}></div>
-              <div className="absolute z-2 left-0 rounded-full w-full h-1 bg-transparent border-1 border-gray-400"></div>
-            </div>
-          </div>
+        <div className="h-[1px] bg-gray w-5/6 mt-7 mb-3"></div>
+        <div className="w-5/6 flex flex-row justify-evenly mt-2">
+          <img src={icons.blue_book} className="w-10 h-10 hover:animate-bounce cursor-pointer"/>
+          <img src={icons.bicep} className="w-10 h-10 hover:animate-bounce cursor-pointer"/>
+          <img src={icons.purple_potion} className="w-10 h-10 hover:animate-bounce cursor-pointer"/>
+          <img src={icons.donut} className="w-10 h-10 hover:animate-bounce cursor-pointer"/>
         </div>
 
       </div>

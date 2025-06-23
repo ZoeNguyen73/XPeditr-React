@@ -12,6 +12,8 @@ const images = {
   bg_purple_sky: "https://ik.imagekit.io/ipy2x824p/XPeditr/bg_purple_sky__Tu7pTGvW",
   bg_beige_sky: "https://ik.imagekit.io/ipy2x824p/XPeditr/bg_beige_sky_iZSWFTT2w",
   bg_night_sky: "https://ik.imagekit.io/ipy2x824p/XPeditr/bg_night_sky_YcAyFL1-c.png",
+  bg_purple_sky_darken: "https://ik.imagekit.io/ipy2x824p/XPeditr/bg_purple_sky_darken_tBTB4ppfm.png",
+  bg_mint_sky_lighten: "https://ik.imagekit.io/ipy2x824p/XPeditr/bg_mint_sky_lighten_fH-thSB0BJ.png",
 
   knight_run_gif: "https://ik.imagekit.io/ipy2x824p/XPeditr/__Run_GDbgg3Pvj.gif",
   knight_attackcombo2hit_gif: "https://ik.imagekit.io/ipy2x824p/XPeditr/__AttackCombo2hit_E3bTvN4qS.gif",

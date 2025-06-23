@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { LuCircleHelp } from "react-icons/lu";
 
 import { cn } from "../utils/ClassName";
 
 const StatDisplay = ({ stat, containerStyles}) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
   const { code, description, icon, level, totalPointToNextLevel, thisLevelAccPoint } = stat;
   const progressPercent = `${thisLevelAccPoint / totalPointToNextLevel * 100}%`;
   const { tooltip_text } = description;
@@ -18,10 +21,16 @@ const StatDisplay = ({ stat, containerStyles}) => {
           <div className="flex flex-row items-center">
             <p className="text-sm font-bold">{code}</p>
             <div className="relative group inline-block">
-              <LuCircleHelp className="ml-1 h-4 w-4 cursor-pointer"/>
-              <div className="absolute mt-2 w-max whitespace-nowrap bg-blue-100 text-blue text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                {tooltip_text}
-              </div>
+              <LuCircleHelp 
+                className="ml-1 h-4 w-4 cursor-pointer"
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              />
+              {showTooltip && (
+                <div className="absolute text-left mt-2 max-w-[270px] w-max whitespace-normal bg-blue-100 text-blue text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                  {tooltip_text}
+                </div>
+              )}
             </div>
             
           </div>

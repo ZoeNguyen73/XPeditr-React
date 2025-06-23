@@ -8,6 +8,8 @@ import StatDisplay from "../StatDisplay";
 import images from "../../constants/images";
 import icons from "../../constants/icons";
 
+const avatarName = "9a";
+
 const STATS_DATA = [
   { 
     code: "STR", 
@@ -62,21 +64,18 @@ const STATS_DATA = [
 const ProfileSideBar = () => {
   const { theme, toggleTheme } = useThemeContext();
   const bgImg = theme === "dark"
-    ? "bg_purple_sky"
-    : "bg_mint_sky";
+    ? "bg_purple_sky_darken"
+    : "bg_mint_sky_lighten";
 
   return (
     <div 
-      className="relative rounded-xl h-full w-full"
+      className="relative rounded-xl h-full w-full overflow-y-auto"
       style={{
         backgroundImage: `url('${images[bgImg]}')`,
         backgroundSize: "cover",
         backgroundPosition: "bottom center",
       }}
     >
-      <div className={`absolute inset-0 ${theme === "dark" ? "bg-black opacity-75" : "bg-white opacity-60"} z-0 rounded-xl overflow-hidden`}>
-
-      </div>
       
       <button
         onClick={toggleTheme}
@@ -90,8 +89,8 @@ const ProfileSideBar = () => {
         )}
       </button>
 
-      <div className="z-1 flex flex-col items-center absolute top-8 left-0 w-full h-full">
-        <Avatar avatarName="1a" size="lg"/>
+      <div className="z-1 flex flex-col items-center absolute left-0 w-full mt-8 mb-3">
+        <Avatar avatarName={avatarName} size="lg"/>
 
         <p className="text-yellow text-3xl font-accent text-2xl font-medium tracking-wide">Senpot</p>
 
@@ -137,6 +136,8 @@ const ProfileSideBar = () => {
           <img src={icons.purple_potion} className="w-10 h-10 hover:animate-bounce cursor-pointer"/>
           <img src={icons.donut} className="w-10 h-10 hover:animate-bounce cursor-pointer"/>
         </div>
+
+        <div className="mb-8"></div>
 
       </div>
       

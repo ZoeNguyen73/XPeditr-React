@@ -10,6 +10,7 @@
   --color-background: var(--background);
   --color-text: var(--text);
   --color-sidebar: var(--sidebar);
+  --color-hover: var(--hover);
   --color-gray: var(--gray);
   --color-brown: var(--brown);
   --color-orange: var(--orange);
@@ -63,6 +64,7 @@
   --background: #F1F1EF;
   --text: #373530;
   --sidebar: #F7F6F3;
+  --hover: #FFFFFF;
   --gray: #787774;
   --brown: #976D57;
   --orange: #CC782F;

@@ -5,13 +5,16 @@ import { useAuthContext } from "../context/AuthProvider";
 import ProfileSideBar from "../components/Dashboard/ProfileSideBar";
 import MainContent from "../components/Dashboard/MainContent";
 import SideContent from "../components/Dashboard/SideContent";
+import NavBar from "../components/SiteHeader/NavBar";
 
 const Dashboard = () => {
 
   return (
-    <div className="flex flex-row-nowrap gap-3 text-text p-10 h-screen">
 
-      <div className="hidden lg:block flex-2 min-w-[280px] h-full overflow-hidden">
+    <div className="relative flex flex-row-nowrap gap-3 text-text pt-15 px-8 pb-8 h-screen">
+      <NavBar containerStyles="absolute top-0 left-0 pr-33"/>
+
+      <div className="hidden lg:block flex-2 min-w-[280px] overflow-hidden">
         <ProfileSideBar />
       </div>
 
@@ -22,6 +25,7 @@ const Dashboard = () => {
         <SideContent />
       </div>
     </div>
+    
   )
 };
 

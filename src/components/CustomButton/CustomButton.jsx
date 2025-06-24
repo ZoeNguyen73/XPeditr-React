@@ -7,6 +7,7 @@ import { cn } from "../../utils/ClassName";
 const baseStyles = "inline-flex items-center justify-center font-sans font-medium tracking-wider rounded-xl transition-colors focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer";
 
 const sizeStyles = {
+  xs: "text-xs px-2 py-1",
   sm: "text-sm px-3 py-1.5",
   md: "text-base px-4 py-2",
   lg: "text-lg px-5 py-3",
@@ -15,7 +16,7 @@ const sizeStyles = {
 const variantStyles = {
   primary: "bg-btn-primary-bg text-btn-primary-text border-btn-primary-border hover:bg-btn-primary-hover",
   secondary: "bg-btn-secondary-bg text-btn-secondary-text border-btn-secondary-border hover:bg-btn-secondary-hover",
-  tertiary: "bg-btn-tertiary-bg text-btn-tertiary-text border-btn-tertiary-border hover:bg-btn-tertiary-hover",
+  tertiary: "bg-btn-tertiary-bg text-btn-tertiary-text border-btn-tertiary-border hover:bg-btn-tertiary-hover border-1",
   danger: "bg-btn-danger-bg text-btn-danger-text border-btn-danger-border hover:bg-btn-danger-hover",
 }
 

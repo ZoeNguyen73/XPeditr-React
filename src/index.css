@@ -10,6 +10,7 @@
   --color-background: var(--background);
   --color-text: var(--text);
   --color-sidebar: var(--sidebar);
+  --color-hover: var(--hover);
   --color-gray: var(--gray);
   --color-brown: var(--brown);
   --color-orange: var(--orange);
@@ -48,6 +49,16 @@
   --color-btn-disabled-hover: var(--btn-disabled-hover);
   --color-btn-disabled-text: var(--btn-disabled-text);
   --color-btn-disabled-border: var(--btn-disabled-border);
+  --text-base: 0.875rem;
+  --text-sm: 0.75rem;
+  --text-xs: 0.65rem;
+  --text-lg: 1rem;
+  --text-xl: 1.125rem;
+  --text-2xl: 1.25rem;
+  --text-3xl: 1.5rem;
+  --text-4xl: 1.875rem;
+  --text-5xl: 2.25rem;
+  --text-9xl: 6rem;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -63,6 +74,7 @@
   --background: #F1F1EF;
   --text: #373530;
   --sidebar: #F7F6F3;
+  --hover: #FFFFFF;
   --gray: #787774;
   --brown: #976D57;
   --orange: #CC782F;
@@ -138,10 +150,10 @@
   --btn-secondary-hover: #E6F1FA;
   --btn-secondary-text: #005BAB;
   --btn-secondary-border: "transparent";
-  --btn-tertiary-bg: #FFFFFF;
-  --btn-tertiary-hover: #F6F5F4;
-  --btn-tertiary-text: #191918;
-  --btn-tertiary-border: #F6F5F4;
+  --btn-tertiary-bg: "transparent";
+  --btn-tertiary-hover: #2c2c2c;
+  --btn-tertiary-text: #D4D4D4;
+  --btn-tertiary-border: #9B9B9B;
   --btn-danger-bg: #0075DE;
   --btn-danger-hover: #DE555540;
   --btn-danger-text: #DE5550;

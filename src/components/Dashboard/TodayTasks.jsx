@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import Task from "./Task";
 
 import Button from "../CustomButton/CustomButton";
@@ -90,7 +92,7 @@ const TASKS = [
   },
   {
     title: "Call Grandma",
-    due_date: "25 Jun 2025",
+    // due_date: "25 Jun 2025",
     is_completed: false,
     rewards: {
       xp: 10,
@@ -108,7 +110,7 @@ const TASKS = [
   },
   {
     title: "Study React for 1 hour",
-    due_date: "27 Jun 2025",
+    due_date: "20 Jun 2025",
     is_completed: false,
     rewards: {
       xp: 35,
@@ -119,12 +121,34 @@ const TASKS = [
 ];
 
 const TodayTasks = ({ containerStyles }) => {
+  const [ tasks, setTasks ] = useState(null);
+
   const taskCount = TASKS.length;
   let completedTaskCount = 0;
 
   TASKS.forEach(task => {
     if (task.is_completed) completedTaskCount++;
   });
+
+  useEffect(() => {
+    TASKS.sort((a, b) => {
+      if (a.due_date) {
+        if (b.due_date) {
+          const aDueDate = new Date(a.due_date);
+          const bDueDate = new Date(b.due_date);
+          if (aDueDate < bDueDate) return -1;
+          if (aDueDate > bDueDate) return 1;
+        } else {
+          return -1;
+        }
+      } else {
+        if (b.due_date) return 1;
+        return 0;
+      }
+    })
+    // console.log("sorted Tasks: " + JSON.stringify(TASKS));
+    setTasks(TASKS);
+  }, [TASKS])
 
   // TO DO: logic to move the completed tasks to the bottom of the list
 
@@ -143,8 +167,8 @@ const TodayTasks = ({ containerStyles }) => {
 
       {/* scrollable tasks list */}
       <div className="flex-1 overflow-y-auto pr-3">
-        { TASKS.length > 0 && (
-          TASKS.map(task => (<Task containerStyles="mt-2 mb-2" task={task} />))
+        { tasks && tasks.length > 0 && (
+          tasks.map((task, index) => (<Task containerStyles="mt-2 mb-2" task={task} if={index} />))
         )}
       </div>
       

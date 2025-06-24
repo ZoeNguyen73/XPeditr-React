@@ -18,6 +18,7 @@ const images = {
   knight_run_gif: "https://ik.imagekit.io/ipy2x824p/XPeditr/__Run_GDbgg3Pvj.gif",
   knight_attackcombo2hit_gif: "https://ik.imagekit.io/ipy2x824p/XPeditr/__AttackCombo2hit_E3bTvN4qS.gif",
   knight_crouchwalk_gif: "https://ik.imagekit.io/ipy2x824p/XPeditr/__CrouchWalk_TCH94FJ9T.gif",
+  boss_demon_slime_idle_gif: "https://ik.imagekit.io/ipy2x824p/XPeditr/boss_demon_slime_idle_ADR28ZCyM.gif",
 }
 
 export default images;

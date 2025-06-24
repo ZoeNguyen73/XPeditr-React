@@ -4,18 +4,28 @@ import { cn } from "../../utils/ClassName";
 
 const Task = ({ task, containerStyles }) => {
   const { title, rewards, is_completed, due_date } = task;
-  const baseStyles = "flex flex-col gap-2 bg-sidebar w-full px-3 rounded-lg mt-1 mb-1 py-2 cursor-pointer hover:bg-hover";
-  
-  // TO DO: interactions
-  // click on the task anywhere but the check box: open the task in pop up
-  // click on the check box: complete the task
+  const baseStyles = "flex flex-col gap-0.5 bg-sidebar w-full px-3 rounded-lg mt-1 mb-1 py-1.5 cursor-pointer hover:bg-hover";
+
+  let borderStyles = "";
+
+  if (due_date) {
+    const dueDate = new Date(due_date).getDate();
+    const today = new Date().getDate();
+
+    if (dueDate < today) {
+      borderStyles = "border-1 border-red-500/30";
+
+    } else if (dueDate === today) {
+      borderStyles = "border-1 border-amber-500/30";
+    }
+  }
 
   return (
-    <div className={cn(baseStyles, containerStyles)}>
+    <div className={cn(baseStyles, containerStyles, borderStyles)}>
       <div className={`flex flex-row gap-2 items-center`}>
-        { !is_completed && (<LuSquare style={{width: 20, height: 20}}/>) }
-        { is_completed && (<LuSquareCheck style={{width: 20, height: 20}} color="green"/>) }
-        <p className={`${is_completed ? "text-green" : "text-text"} font-sans tracking-wide pt-1`}>{title}</p>
+        { !is_completed && (<LuSquare style={{width: 16, height: 16}}/>) }
+        { is_completed && (<LuSquareCheck style={{width: 16, height: 16}} color="green"/>) }
+        <p className={`${is_completed ? "text-green" : "text-text"} font-sans tracking-wide pt-0.5 text-base`}>{title}</p>
         <div className="flex-1"></div>
         {due_date && (
           <p className="text-xs text-gray">Due: {due_date}</p>

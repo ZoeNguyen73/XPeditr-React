@@ -35,7 +35,7 @@ const Quote = ({ containerStyles }) => {
   return (
     <div className={containerStyles}>
       { quote && (
-        <p className="text-center font-medium font-accent tracking-wider text-red text-sm">
+        <p className="text-center font-medium font-accent tracking-wider text-red text-lg">
           "{quote}"
         </p>
       )}

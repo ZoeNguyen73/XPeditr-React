@@ -13,8 +13,8 @@ const MainContent = ({ containerStyles }) => {
     <div className={`flex flex-col h-full items-center`}>
 
       {/* MainContent header */}
-      <p className="text-4xl font-accent font-bold text-yellow tracking-wider z-2">
-        Quest Log
+      <p className="text-5xl font-accent font-bold text-yellow tracking-wider z-2">
+        Adventure Journal
       </p>
       {date && (
         <p className="text-sm text-text tracking-wide mt-1">{date}</p>

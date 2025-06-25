@@ -1,9 +1,10 @@
-import { FiSun, FiMoon } from "react-icons/fi";;
+import { FiSun, FiMoon } from "react-icons/fi";
 
 import { useThemeContext } from "../../context/ThemeProvider";
 
 import Avatar from "../Avatar/Avatar";
 import StatDisplay from "../StatDisplay";
+import ThemeToggle from "../ThemeToggle";
 
 import images from "../../constants/images";
 import icons from "../../constants/icons";
@@ -76,18 +77,6 @@ const ProfileSideBar = () => {
         backgroundPosition: "bottom center",
       }}
     >
-      
-      <button
-        onClick={toggleTheme}
-        className="absolute top-3 right-3 p-2 rounded-full transition bg-background z-2 cursor-pointer hover:border-2 border-blue"
-        aria-label="Toggle Theme"
-      >
-        {theme === "dark" ? (
-          <FiMoon className="text-yellow w-6 h-6" />
-        ) : (
-          <FiSun className="text-gray w-6 h-6" />
-        )}
-      </button>
 
       <div className="z-1 flex flex-col items-center absolute left-0 w-full mt-8 mb-3">
         <Avatar avatarName={avatarName} size="lg"/>

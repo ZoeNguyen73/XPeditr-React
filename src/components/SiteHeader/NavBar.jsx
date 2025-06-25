@@ -3,6 +3,7 @@ import { useThemeContext } from "../../context/ThemeProvider";
 import { cn } from "../../utils/ClassName";
 
 const NAVS = [
+  { title: "Dashboard", path: "" },
   { title: "Quests", path: "" },
   { title: "Tasks", path: "" },
   { title: "Habits", path: "" },

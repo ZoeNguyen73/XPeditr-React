@@ -13,6 +13,7 @@ import LogIn from "./pages/LogIn";
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
+import Quests from "./pages/Quests";
 
 function App() {
 
@@ -59,6 +60,15 @@ function App() {
         element={
           <MainLayout>
             <Dashboard />
+          </MainLayout>
+        }
+      />
+
+      <Route
+        path="/quests"
+        element={
+          <MainLayout>
+            <Quests />
           </MainLayout>
         }
       />

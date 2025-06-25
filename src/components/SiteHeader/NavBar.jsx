@@ -31,7 +31,7 @@ const NavBar = ({ containerStyles }) => {
   return (
     <div className={cn("w-full flex flex-row gap-2 mt-2 justify-center", containerStyles)}>
       {NAVS.length > 0 && (
-        NAVS.map(nav => (<NavChip id={nav.title} nav={nav}/>))
+        NAVS.map(nav => (<NavChip key={nav.title} nav={nav}/>))
       )}
     </div>
   )

@@ -38,10 +38,10 @@ const BossFight = () => {
       </div>
       <div className="mx-8 relative h-3">
         <div 
-          className="absolute z-3 left-0 rounded-full h-3 bg-gradient-to-tr from-rose-700 to-rose-950 border-1 border-rose-950 dark:border-rose-500/30" 
+          className="absolute z-3 left-0 rounded-full h-3 bg-gradient-to-tr from-rose-700 to-rose-950" 
           style={{width: "45%"}}
         />
-        <div className="absolute z-2 left-0 rounded-full w-full h-3 border-1 border-rose-950 dark:border-rose-500/30"></div>
+        <div className="absolute z-2 left-0 rounded-full w-full h-3 bg-gray/40 dark:bg-gray/20"></div>
       </div>
       <div className="mx-8 mt-2 mb-2">
         <p className="text-gray text-xs tracking-wide">

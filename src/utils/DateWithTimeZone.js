@@ -1,5 +1,10 @@
-const getFormattedDate= () => {
-  const now = new Date();
+const getFormattedDate= (dateString = "") => {
+  let date;
+  if (dateString) {
+    date = new Date(dateString);
+  } else {
+    date = new Date();
+  }
 
   const options = {
     weekday: "long",
@@ -9,7 +14,7 @@ const getFormattedDate= () => {
   };
 
   // undefined : will default to system's locale
-  return now.toLocaleDateString(undefined, options);
+  return date.toLocaleDateString(undefined, options);
 };
 
 export default getFormattedDate;

@@ -10,7 +10,7 @@ const NAVS = [
   { title: "Tasks", path: "" },
   { title: "Habits", path: "" },
   { title: "Companions", path: "" },
-  { title: "Analytics", path: "" },
+  { title: "Rewards", path: "" },
   { title: "Settings", path: "" },
 ];
 

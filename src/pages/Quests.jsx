@@ -74,21 +74,21 @@ const Quests = () => {
 
   return (
 
-    <div className="relative flex flex-col text-text pt-15 px-8 pb-8 h-screen">
+    <div className="relative flex flex-col text-text pt-15 px-8 pb-8 md:px-1 sm:px-1 h-screen overflow-y-auto">
       <NavBar containerStyles="absolute top-0 left-0"/>
 
       <div className="flex flex-row justify-center w-full mb-15">
         <p className="font-accent text-5xl text-yellow tracking-wider font-bold">Quests</p>
       </div>
 
-      <div className="flex flex-row w-full flex-1 gap-5 px-8">
-
-        <div className="hidden lg:block min-w-[400px] overflow-hidden">
+      <div className="flex flex-row w-full flex-1 gap-5 px-2 md:px-5 lg:px-10 xl:px-20 flex-1">
+   
+        <div className="hidden md:block min-w-[380px] overflow-hidden h-full">
           <QuestsSideBar quests={QUESTS} setSelectedIndex={setSelectedIndex} selectedIndex={selectedIndex}/>
         </div>
 
-        <div className="flex-4 overflow-hidden">
-          <QuestDetails />
+        <div className="flex-1 overflow-hidden">
+          <QuestDetails quest={QUESTS[0]}/>
         </div>
       </div>
     </div>

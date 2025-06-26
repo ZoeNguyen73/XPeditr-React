@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LuChevronRight, LuChevronsDown } from "react-icons/lu";
 
 import { cn } from "../../utils/ClassName";
+import getQuestIconType from "../../utils/GetQuestIconType";
 
 const QuestNode = ({ quest, setSelectedIndex, selectedIndex, dispatch, openState }) => {
   const isOpen = openState[quest.id] ?? true;
@@ -12,30 +13,23 @@ const QuestNode = ({ quest, setSelectedIndex, selectedIndex, dispatch, openState
   const { title, type, completionPercent, id, children } = quest;
   const isSelected = selectedIndex === id;
 
-  const baseStyles = "rounded-xl py-2 px-4 text-base text-left tracking-wide hover:translate-x-2 transition cursor-pointer";
-  let typeName;
+  const baseStyles = "mb-1 rounded-xl py-2 px-4 text-base text-left tracking-wide hover:translate-x-2 transition cursor-pointer";
+  const { icon, typeName } = getQuestIconType(type);
   let colorStyles;
-  let icon;
   
   if (type === "epic") {
-    typeName = "Epic Quest";
-    icon = "🏰";
     if (!isSelected) {
       colorStyles = "border-l-2 border-red bg-red/10 hover:bg-red/40";
     } else {
       colorStyles = "border-2 border-red bg-red/80 text-white shadow-md";
     }
   } else if (type === "main") {
-    typeName = "Main Quest";
-    icon = "🏆";
     if (!isSelected) {
       colorStyles = "border-l-2 border-yellow ml-3 bg-yellow/10 hover:bg-yellow/40";
     } else {
       colorStyles = "border-2 border-yellow ml-3 bg-yellow/80 text-white shadow-md";
     }
   } else if (type === "minor") {
-    typeName = "Minor Quest";
-    icon = "🎯";
     if (!isSelected) {
       colorStyles = "border-l-2 border-blue ml-6 bg-blue/10 hover:bg-blue/40";
     } else {

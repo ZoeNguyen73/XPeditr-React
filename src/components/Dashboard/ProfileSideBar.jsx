@@ -1,10 +1,7 @@
-import { FiSun, FiMoon } from "react-icons/fi";
-
 import { useThemeContext } from "../../context/ThemeProvider";
 
 import Avatar from "../Avatar/Avatar";
 import StatDisplay from "../StatDisplay";
-import ThemeToggle from "../ThemeToggle";
 
 import images from "../../constants/images";
 import icons from "../../constants/icons";
@@ -63,7 +60,7 @@ const STATS_DATA = [
 ];
 
 const ProfileSideBar = () => {
-  const { theme, toggleTheme } = useThemeContext();
+  const { theme } = useThemeContext();
   const bgImg = theme === "dark"
     ? "bg_purple_sky_darken"
     : "bg_mint_sky_lighten";

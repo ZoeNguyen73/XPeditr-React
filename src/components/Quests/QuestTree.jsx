@@ -64,18 +64,12 @@ const QuestTree = ({ quests, selectedIndex, setSelectedIndex }) => {
       <p className="font-accent text-orange font-medium text-2xl tracking-wider">Active Quests</p>
       <div className="bg-gray h-[1px] mx-20 mt-3" />
 
-      <div className="flex flex-col w-full overflow-y-auto flex-1 mt-5 gap-2 overflow-x-hidden">
-        {/* { QUESTS.length > 0 && (
-          QUESTS.map((quest, index) => (
-            <QuestBox 
-              key={index} 
-              quest={quest} 
-              handlePress={() => setSelectedIndex(index)} 
-              isSelected={selectedIndex === index}
-              index={index}
-            />
-          ))
-        )} */}
+      {/* TO DO: allow user to quick add related quest in this veiw */}
+      <div className="border-1 border-gray/80 dark:border-gray/20 border-dotted w-full rounded-xl px-3 py-1 mt-4 cursor-pointer hover:bg-gray/15 dark:hover:bg-gray/5">
+        <p className="text-base text-gray/80 dark:text-gray/50">+ Add a <span className="font-medium">Quest</span></p>
+      </div>
+
+      <div className="flex flex-col w-full overflow-y-auto flex-1 mt-2 gap-2 overflow-x-hidden">
 
         { quests.length > 0 && (
           quests.map(quest => (

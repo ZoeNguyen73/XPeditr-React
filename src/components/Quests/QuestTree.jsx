@@ -1,51 +1,91 @@
-import { useState, useEffect } from "react";
+import { useState, useReducer } from "react";
+import { LuChevronRight, LuChevronsDown } from "react-icons/lu";
 
-import QuestBox from "./QuestBox";
+import QuestNode from "./QuestNode";
 
-const QUESTS = [
-  {
-    title: "Build indie game studio",
-    type: "epic",
-    completionPercent: "35%",
-  },
-  {
-    title: "Publish first game",
-    type: "main",
-    completionPercent: "40%",
-  },
-  {
-    title: "Complete prototype",
-    type: "minor",
-    completionPercent: "80%",
-  },
-  {
-    title: "Learn Unity advanced",
-    type: "minor",
-    completionPercent: "40%",
-  },
-  {
-    title: "Polish game assets",
-    type: "minor",
-    completionPercent: "30%",
-  },
-];
+// Utility to get all descendant IDs for collapsing
+const getAllDescendantIds = (quest) => {
+  let ids = [];
+  if (quest.children) {
+    quest.children.forEach(child => {
+      ids.push(child.id);
+      ids = ids.concat(getAllDescendantIds(child));
+    });
+  }
+  return ids;
+};
 
-const QuestTree = () => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
+// Reducer logic
+const reducer = (state, action) => {
+  switch (action.type) {
+
+    // checks if the action type === "TOGGLE"
+    case "TOGGLE":
+      // getting the id and quest info from the action
+      const { id, quest } = action.payload; // id: eg "epic1"; quest: the full quest object (with children)
+      
+      // get the current state of the respective id
+      // update it true -> false, or false -> true
+      const currentlyOpen = state[id];
+      const newState = { ...state, [id]: !currentlyOpen };
+
+      // If collapsing, also collapse all children
+      if (currentlyOpen && quest.children) {
+        const descendantIds = getAllDescendantIds(quest);
+        descendantIds.forEach(childId => {
+          newState[childId] = false;
+        });
+      }
+      return newState;
+    default:
+      return state;
+  }
+};
+
+const QuestTree = ({ quests, selectedIndex, setSelectedIndex }) => {
+
+  // Default open state for all quests
+  const getInitialState = (quests) => {
+    const state = {};
+    const recurse = (questList) => {
+      questList.forEach(quest => {
+        state[quest.id] = true;
+        if (quest.children) recurse(quest.children);
+      });
+    };
+    recurse(quests);
+    return state;
+  };
+
+  const [openState, dispatch] = useReducer(reducer, getInitialState(quests));
 
   return (
     <div className="relative rounded-xl h-full w-full bg-sidebar p-3 flex flex-col">
       <p className="font-accent text-orange font-medium text-2xl tracking-wider">Active Quests</p>
+      <div className="bg-gray h-[1px] mx-20 mt-3" />
 
       <div className="flex flex-col w-full overflow-y-auto flex-1 mt-5 gap-2 overflow-x-hidden">
-        { QUESTS.length > 0 && (
+        {/* { QUESTS.length > 0 && (
           QUESTS.map((quest, index) => (
             <QuestBox 
               key={index} 
               quest={quest} 
               handlePress={() => setSelectedIndex(index)} 
               isSelected={selectedIndex === index}
-              index={index} 
+              index={index}
+            />
+          ))
+        )} */}
+
+        { quests.length > 0 && (
+          quests.map(quest => (
+            <QuestNode
+              key={quest.id} 
+              quest={quest}
+              setSelectedIndex={setSelectedIndex}
+              selectedIndex={selectedIndex}
+              dispatch={dispatch}
+              openState={openState}
             />
           ))
         )}

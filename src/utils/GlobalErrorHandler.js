@@ -18,7 +18,7 @@ const handleGlobalError = (error, handleFormError) => {
   if (error?.response) {
     type = "response";
     const status = error.response.status;
-    const message = error.response.data.message || message;
+    message = error.response.data.message || message;
     let details = error.response.data.details || details;
 
     // Normalize details to string

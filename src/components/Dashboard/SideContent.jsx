@@ -19,8 +19,8 @@ const SideContent = () => {
           <p className="mt-2 text-base tracking-wide text-gray">Current Major Quest:</p>
           <p className="text-3xl font-accent text-orange font-medium tracking-wider">Finish first full game</p>
           <div className="mx-8 w-5/6 mt-3 relative h-3">
-            <div className="absolute z-3 left-0 rounded-full h-3 bg-gradient-to-tr from-emerald-600 to-cyan-800 border-1 border-emerald-600" style={{width: "65%"}}></div>
-            <div className="absolute z-2 left-0 rounded-full w-full h-3 border-1 border-emerald-600"></div>
+            <div className="absolute z-3 left-0 rounded-full h-3 bg-gradient-to-tr from-emerald-600 to-cyan-800" style={{width: "65%"}}></div>
+            <div className="absolute z-2 left-0 rounded-full w-full h-3 bg-gray/40 dark:bg-gray/20"></div>
           </div>
           <p className="text-xs text-gray mt-3">25 tasks completed - 10 to go!</p>
           <Button 
@@ -30,21 +30,6 @@ const SideContent = () => {
             variant="tertiary"
           />
         </div>
-        {/* <div className="w-full bg-bg-gray rounded-xl p-2">
-          <p className="text-base text-left text-orange font-medium tracking-wider">🏆 Finish first full game</p>
-          <div className="flex flex-col pl-7 gap-2 mt-2">
-            <div className="flex flex-row">
-              <p className="text-sm text-left text-gray ml-2">🎯 Complete Unity course</p>
-            </div>
-            <div className="flex flex-row">
-              <p className="text-sm text-left text-gray ml-2">🎯 Design core gameplay mechanics</p>
-            </div>
-            <div className="flex flex-row">
-              <p className="text-sm text-left text-gray ml-2">🎯 Build a playable prototype</p>
-            </div>
-            
-          </div>
-        </div> */}
       </div>
       <BossFight />
 

@@ -1,10 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 import { useThemeContext } from "../../context/ThemeProvider";
 
 import { cn } from "../../utils/ClassName";
 
 const NAVS = [
-  { title: "Dashboard", path: "" },
-  { title: "Quests", path: "" },
+  { title: "Dashboard", path: "/dashboard" },
+  { title: "Quests", path: "/quests" },
   { title: "Tasks", path: "" },
   { title: "Habits", path: "" },
   { title: "Companions", path: "" },
@@ -14,6 +16,7 @@ const NAVS = [
 
 const NavChip = ({ nav }) => {
   const { theme } = useThemeContext();
+  const navigate = useNavigate();
 
   const baseStyles = theme === "dark"
     ? "hover:bg-bg-blue"
@@ -21,7 +24,7 @@ const NavChip = ({ nav }) => {
 
   const { title, path } = nav;
   return (
-    <div className="hover:bg-bg-blue rounded-full px-2 cursor-pointer">
+    <div className="hover:bg-bg-blue rounded-full px-2 cursor-pointer" onClick={() => navigate(path)}>
       <p className="font-sans text-text tracking-wide text-base hover:font-medium hover:text-blue hover:underline">{title}</p>
     </div>
   )

@@ -96,7 +96,7 @@ const Register = () => {
   const handleActivateButtonClick = () => {
     setIsRedirecting(true);
     setTimeout(() => {
-      navigate(`/activate/${activateToken}`);
+      navigate(`auth/activate/${activateToken}`);
     }, 1000);
   };
 
@@ -186,7 +186,7 @@ const Register = () => {
                 error={formErrors.email}
                 placeholder="your email"
                 required={true}
-                className="mb-3"
+                containerStyles="mb-3"
                 fullWidth={true}
                 
               />
@@ -200,7 +200,7 @@ const Register = () => {
                 error={formErrors.password}
                 placeholder="password"
                 required={true}
-                className="mb-3"
+                containerStyles="mb-3"
                 fullWidth={true}
               />
 
@@ -213,7 +213,7 @@ const Register = () => {
                 error={formErrors.confirm_password}
                 placeholder="confirm password"
                 required={true}
-                className="mb-3"
+                containerStyles="mb-3"
                 fullWidth={true}
               />
 

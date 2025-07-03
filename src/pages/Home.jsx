@@ -22,8 +22,13 @@ const Home = () => {
       )}
       <h1 className="text-3xl font-bold text-text mb-3">Welcome to XPeditr</h1>
       <Button 
-        handlePress={() => navigate("/register")}
+        handlePress={() => navigate("/auth/register")}
         title="Register"
+        size="lg"
+      />
+      <Button 
+        handlePress={() => navigate("/auth/login")}
+        title="Login"
         size="lg"
       />
     </div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import NavBar from "../components/SiteHeader/NavBar";
-import QuestsSideBar from "../components/Quests/QuestsSideBar";
-import QuestDetails from "../components/Quests/QuestDetails";
+import NavBar from "../../components/SiteHeader/NavBar";
+import QuestsSideBar from "../../components/Quests/QuestsSideBar";
+import QuestDetails from "../../components/Quests/QuestDetails";
 
 const QUESTS = [
   {
@@ -74,7 +74,7 @@ const Quests = () => {
 
   return (
 
-    <div className="relative flex flex-col text-text pt-15 px-8 pb-8 md:px-1 sm:px-1 h-screen overflow-y-auto">
+    <div className="relative flex flex-col text-text pt-15 lg:px-3 pb-8 px-1 h-screen overflow-y-auto">
       <NavBar containerStyles="absolute top-0 left-0"/>
 
       <div className="flex flex-row justify-center w-full mb-15">

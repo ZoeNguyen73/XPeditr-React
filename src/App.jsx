@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import "react-day-picker/style.css";
 
 import MainLayout from "./layouts/MainLayout";
 import AuthLayout from "./layouts/AuthLayout";
@@ -13,74 +14,32 @@ import LogIn from "./pages/LogIn";
 
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
-import Quests from "./pages/Quests";
+import Quests from "./pages/Quests/Quests";
+import CreateQuest from "./pages/Quests/CreateQuest";
 
 function App() {
 
   return (
     <Routes>
-      <Route 
-        path="/register" 
-        element={
-          <AuthLayout>
-            <Register />
-          </AuthLayout>
-        }
-      />
+      <Route path="/auth" element={<AuthLayout />}>
+        {/* <Route index element={<Quests />} /> */}
+        <Route path="activate/:activateToken" element={<Activate />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<LogIn />} />
+      </Route>
 
-      <Route 
-        path="/activate/:activateToken"
-        element={
-          <AuthLayout>
-            <Activate />
-          </AuthLayout>
-        }
-      />
-      
-      <Route 
-        path="/profile-setup"
-        element={
-          <AuthLayout>
-            <ProfileSetup />
-          </AuthLayout>
-        }
-      />
+      <Route path="/dashboard" element={<MainLayout />}>
+        <Route index element={<Dashboard />} />
+      </Route>
 
-      <Route 
-        path="/login"
-        element={
-          <AuthLayout>
-            <LogIn />
-          </AuthLayout>
-        }
-      />
+      <Route path="/quests" element={<MainLayout />}>
+        <Route index element={<Quests />} />
+        <Route path="create" element={<CreateQuest />} />
+      </Route>
 
-      <Route
-        path="/dashboard"
-        element={
-          <MainLayout>
-            <Dashboard />
-          </MainLayout>
-        }
-      />
-
-      <Route
-        path="/quests"
-        element={
-          <MainLayout>
-            <Quests />
-          </MainLayout>
-        }
-      />
-
-      <Route
-        path="/"
-        element={
-          <MainLayout>
-            <Home />
-          </MainLayout>
-        }
-      />
+      <Route path="/" element={<MainLayout />} >
+      <Route index element={<Home />} />
+      </Route>
 
     </Routes>
   );

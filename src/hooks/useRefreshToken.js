@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 
 import { useAuthContext } from "../context/AuthProvider";
-import handleGlobalError from "../utils/GlobalErrorHandler";
 import axios from "../api/axios";
 
 import storage from "../utils/Storage";

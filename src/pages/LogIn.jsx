@@ -41,7 +41,7 @@ const LogIn = () => {
       setShowMessageBox(false);
       setErrorMessage("");
       await logOut();
-      navigate("/login");
+      navigate("/auth/login");
     } catch (error) {
       const parsedError = await handleError(error);
       if (parsedError && parsedError?.type !== "form") {
@@ -144,7 +144,7 @@ const LogIn = () => {
           error={formErrors.username}
           placeholder="your username"
           required={true}
-          className="mb-3"
+          containerStyles="mb-3"
           fullWidth={true}
         />
 
@@ -157,7 +157,7 @@ const LogIn = () => {
           error={formErrors.password}
           placeholder="password"
           required={true}
-          className="mb-3"
+          containerStyles="mb-3"
           fullWidth={true}
         />
       </div>

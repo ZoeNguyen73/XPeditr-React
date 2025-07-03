@@ -122,7 +122,7 @@ const DatePicker = ({
   return (
     <div className={containerStyles}>
       <div className="flex flex-row items-center gap-5">
-        <div className={cn("relative font-sans text-lg border-2 rounded-xl border-gray/50 p-2")}>
+        <div className={cn("relative font-sans text-lg border-2 rounded-xl border-gray/50 p-2 w-full 2xl:w-3/7 flex")}>
           <input
             id="date-input"
             name={name}
@@ -130,14 +130,15 @@ const DatePicker = ({
             value={value}
             placeholder={placeholder ? placeholder : "dd-mmm-yyyy"}
             onChange={handleInputChange}
+            className="flex-1 min-w-[110px]"
           />{" "}
-          <button
-            className="cursor-pointer text-lg p-0.5 mr-1 hover:bg-amber-400/20 dark:hover:bg-amber-100/10 rounded"
+          <div
+            className="cursor-pointer text-lg p-0.5 hover:bg-amber-400/20 dark:hover:bg-amber-100/10 rounded"
             onClick={() => handleDayPickerSelect(null)}
           >
             ❌
-          </button>
-          <button
+          </div>
+          <div
             className="cursor-pointer text-lg p-0.5 hover:bg-amber-400/20 dark:hover:bg-amber-100/10 rounded"
             onClick={toggleDialog}
             aria-controls="dialog"
@@ -146,7 +147,7 @@ const DatePicker = ({
             aria-label="Open calendar to choose booking date"
           >
             📆
-          </button>
+          </div>
           
           <dialog
             role="dialog"
@@ -191,7 +192,7 @@ const DatePicker = ({
           </dialog>
         </div>
 
-        <div className="flex flex-row gap-3">
+        <div className="hidden 2xl:flex flex-1 flex-row gap-3">
           {showShortcuts && shortcuts.length > 0 && 
             shortcuts.map(shortcut => (
               <div key={shortcut.label} onClick={() => handleDayPickerSelect(shortcut.value)}>
@@ -212,6 +213,15 @@ const DatePicker = ({
         {validationError && <p className="text-xs font-sans font-italic text-red">{validationError}</p>}
 
       </div>
+      <div className="2xl:hidden w-full flex flex-row gap-3">
+          {showShortcuts && shortcuts.length > 0 && 
+            shortcuts.map(shortcut => (
+              <div key={shortcut.label} onClick={() => handleDayPickerSelect(shortcut.value)}>
+                <p className="text-base text-blue cursor-pointer hover:underline hover:font-medium">{shortcut.label}</p>
+              </div>
+            ))
+          }
+        </div>
     </div>
     
   )

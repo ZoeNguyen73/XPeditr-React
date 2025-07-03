@@ -115,9 +115,9 @@ const QuestCreationForm = () => {
       { showMessageBox && errorMessage && (
         <MessageBox content={errorMessage} type="error" />
       )}
-      <div className="flex flex-row mt-5 items-center">
-        <div className="w-1/5 min-w-[80px] text-left">
-          <p className="font-medium text-gray text-2xl tracking-wide">Quest Type<span className="text-red">*</span></p>
+      <div className="flex flex-row mt-5 items-start">
+        <div className="w-1/5 min-w-[80px] text-left mt-2">
+          <p className="font-medium text-gray text-lg 2xl:text-xl tracking-wide">Quest Type<span className="text-red">*</span></p>
         </div>
         <div>
           <Dropdown
@@ -152,9 +152,9 @@ const QuestCreationForm = () => {
         </div>
       </div>
 
-      <div className="flex flex-row mt-5 items-center">
-        <div className="w-1/5 min-w-[80px] text-left">
-          <p className="font-medium text-gray text-2xl tracking-wide">Parent Quest</p>
+      <div className="flex flex-row mt-5 items-start">
+        <div className="w-1/5 min-w-[80px] text-left mt-2">
+          <p className="font-medium text-gray text-lg 2xl:text-xl tracking-wide">Parent Quest</p>
         </div>
         <div>
           <Dropdown
@@ -169,9 +169,9 @@ const QuestCreationForm = () => {
         </div>
       </div>
 
-      <div className="flex flex-row mt-5 items-center w-full">
-        <div className="w-1/5 min-w-[80px] text-left">
-          <p className="font-medium text-gray text-2xl tracking-wide">Title<span className="text-red">*</span></p>
+      <div className="flex flex-row mt-5 items-start w-full">
+        <div className="w-1/5 min-w-[80px] text-left mt-2">
+          <p className="font-medium text-gray text-lg 2xl:text-xl tracking-wide">Title<span className="text-red">*</span></p>
         </div>
         <FormField 
           label=""
@@ -187,9 +187,9 @@ const QuestCreationForm = () => {
         />
       </div>
 
-      <div className="flex flex-row mt-5 items-center w-full">
-        <div className="w-1/5 min-w-[80px] text-left">
-          <p className="font-medium text-gray text-2xl tracking-wide">Description</p>
+      <div className="flex flex-row mt-5 items-start w-full">
+        <div className="w-1/5 min-w-[80px] text-left mt-2">
+          <p className="font-medium text-gray text-lg 2xl:text-xl tracking-wide">Description</p>
         </div>
         <FormField 
           label=""
@@ -206,9 +206,9 @@ const QuestCreationForm = () => {
         />
       </div>
 
-      <div className="flex flex-row mt-5 items-center w-full">
-        <div className="w-1/5 min-w-[80px] text-left">
-          <p className="font-medium text-gray text-2xl tracking-wide">Due date</p>
+      <div className="flex flex-row mt-5 items-start w-full">
+        <div className="w-1/5 min-w-[80px] text-left mt-2">
+          <p className="font-medium text-gray text-lg 2xl:text-xl tracking-wide">Due date</p>
         </div>
         <DatePicker
           name="due_date"
@@ -217,6 +217,7 @@ const QuestCreationForm = () => {
           error={formErrors.due_date}
           minDate={new Date()}
           popOverDirection="up"
+          containerStyles="flex-1"
         />
       </div>
       

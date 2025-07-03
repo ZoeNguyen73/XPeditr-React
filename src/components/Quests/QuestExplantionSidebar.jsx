@@ -102,7 +102,7 @@ const QuestExplanationSidebar = () => {
         </div>
         <div className="flex flex-row gap-1 tracking-wide mt-1">
           <p>•</p>
-          <p>Just like how plans may change in real life, you can always adjust your Quests, add/remove child quests, move things around, etc... as long as the quest has not been compledte yet!</p>
+          <p>Just like how plans may change in real life, you can always adjust your Quests, add/remove child quests, move things around, etc... as long as the quest has not been completed yet!</p>
         </div>
         
       </div>

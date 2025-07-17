@@ -9,6 +9,7 @@ import DatePicker from "../CustomForm/DatePicker";
 
 import { useAuthContext } from "../../context/AuthProvider";
 import { useErrorHandler } from "../../context/ErrorHandlerProvider";
+import { useGoBack } from "../../utils/Navigation";
 
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
@@ -23,6 +24,7 @@ const QuestCreationForm = () => {
   const { handleError } = useErrorHandler();
   const axiosPrivate = useAxiosPrivate();
   const { auth } = useAuthContext();
+  const goBack = useGoBack();
 
   const [ form, setForm ] = useState({
     type: "epic",
@@ -98,7 +100,9 @@ const QuestCreationForm = () => {
 
       const response = await axiosPrivate.post("quests", payload);
       console.log("response: " + JSON.stringify(response.data));
-      toast.success("Successfully created new quest");
+      toast.success("Successfully created new quest. Redirecting...");
+      setTimeout(() => goBack(), 1000);
+      // goBack();
 
     } catch (error) {
       const parsedError = await handleError(error, handleFormError);

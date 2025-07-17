@@ -17,7 +17,7 @@ const CreateQuest = () => {
     <div className="relative flex flex-col text-text pt-15 lg:px-8 pb-8 px-1 h-screen overflow-y-auto">
       <NavBar containerStyles="absolute top-0 left-0"/>
 
-      <div className="w-full mb-15">
+      <div className="w-full mb-10">
         <p className="font-accent text-5xl text-yellow tracking-wider font-bold">Create New Quest</p>
         <p className="font-sanst text-lg text-text tracking-wider font-medium mt-2">Define your next adventure</p>
       </div>

@@ -220,6 +220,16 @@ const QuestCreationForm = () => {
           containerStyles="flex-1"
         />
       </div>
+
+      <Button 
+        title="Create"
+        handlePress={() => {}}
+        containerStyles="mt-8 w-full"
+        size="lg"
+        isLoading={isSubmitting}
+        icon="✒️"
+        fullWidth={true}
+      />
       
     </div>
   )

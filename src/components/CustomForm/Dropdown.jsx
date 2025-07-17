@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react";
 import { LuChevronDown, LuCheck } from "react-icons/lu";
 
+import { useThemeContext } from "../../context/ThemeProvider";
+
 import { cn } from "../../utils/ClassName";
 
 const Dropdown = ({ 
@@ -19,6 +21,9 @@ const Dropdown = ({
 }) => {
 
   const index = Math.max(options.findIndex(option => option.value === value), 0);
+  const { theme } = useThemeContext();
+
+  const tickColor = theme === "dark" ? "white" : "black";
 
   return (
     <div className={cn(containerStyles, "mx-auto")}>
@@ -38,7 +43,7 @@ const Dropdown = ({
           anchor="bottom"
           transition
           className={cn(
-            'w-(--button-width) rounded-xl border dark:border-neutral-800 dark:bg-neutral-800 bg-gray border-gray p-1 [--anchor-gap:--spacing(1)] focus:outline-none',
+            'w-(--button-width) rounded-xl border dark:border-neutral-800 dark:bg-neutral-800 bg-neutral-300 border-gray p-1 [--anchor-gap:--spacing(1)] focus:outline-none',
             'transition duration-100 ease-in data-leave:data-closed:opacity-0'
           )}
         >
@@ -49,7 +54,7 @@ const Dropdown = ({
               value={value}
               className="group flex cursor-default gap-2 rounded-lg px-3 py-1.5 select-none data-focus:bg-gray/25"
             >
-              <LuCheck className="invisible group-data-selected:visible" color="white"/>
+              <LuCheck className="invisible group-data-selected:visible" color={tickColor}/>
               <p className="text-lg text-text">{label}</p>
             </ListboxOption>
           ))}

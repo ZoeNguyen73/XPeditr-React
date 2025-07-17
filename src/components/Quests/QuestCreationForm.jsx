@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 import FormField from "../CustomForm/FormField";
 import Button from "../CustomButton/CustomButton";
@@ -65,6 +66,52 @@ const QuestCreationForm = () => {
     setFormErrors(prev => ({...prev, [input]: errorMessage}));
   };
 
+  const validate = async () => {
+    let isValid = true;
+    const { title } = form;
+    console.log("form: " + JSON.stringify(form));
+
+    if (!title || title.length === 0) {
+      handleFormError("Please input a valid title for your quest", "title");
+      isValid = false;
+    } else if (title.length < 3) {
+      handleFormError("Please input a longer title for your quest", "title");
+      isValid = false;
+    }
+
+    if (isValid) {
+      await submit();
+    }
+
+  };
+
+  const submit = async () => {
+    setIsSubmitting(true);
+    setShowMessageBox(false);
+
+    try {
+      const { type, title, description, parent_quest, due_date } = form;
+      const payload = { type, title };
+      if (parent_quest !== "no_parent_quest" && parent_quest !== "") payload.parent_quest = parent_quest;
+      if (description !== "") payload.description = description;
+      if (due_date !== "") payload.due_date = due_date;
+
+      const response = await axiosPrivate.post("quests", payload);
+      console.log("response: " + JSON.stringify(response.data));
+      toast.success("Successfully created new quest");
+
+    } catch (error) {
+      const parsedError = await handleError(error, handleFormError);
+      if (parsedError && parsedError?.type !== "form") {
+        setErrorMessage(`${parsedError.message}. ${parsedError.details}`);
+        setShowMessageBox(true);
+      }
+
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   useEffect(() => {
     const getCurrentQuests = async () => {
       try {
@@ -115,6 +162,7 @@ const QuestCreationForm = () => {
       { showMessageBox && errorMessage && (
         <MessageBox content={errorMessage} type="error" />
       )}
+      <Toaster />
       <div className="flex flex-row mt-5 items-start">
         <div className="w-1/5 min-w-[80px] text-left mt-2">
           <p className="font-medium text-gray text-lg 2xl:text-xl tracking-wide">Quest Type<span className="text-red">*</span></p>
@@ -223,7 +271,7 @@ const QuestCreationForm = () => {
 
       <Button 
         title="Create"
-        handlePress={() => {}}
+        handlePress={() => validate()}
         containerStyles="mt-8 w-full"
         size="lg"
         isLoading={isSubmitting}

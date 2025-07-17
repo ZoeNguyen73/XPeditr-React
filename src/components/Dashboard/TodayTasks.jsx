@@ -168,7 +168,7 @@ const TodayTasks = ({ containerStyles }) => {
       {/* scrollable tasks list */}
       <div className="flex-1 overflow-y-auto pr-3">
         { tasks && tasks.length > 0 && (
-          tasks.map((task, index) => (<Task containerStyles="mt-2 mb-2" task={task} if={index} />))
+          tasks.map((task, index) => (<Task containerStyles="mt-2 mb-2" task={task} key={index} />))
         )}
       </div>
       

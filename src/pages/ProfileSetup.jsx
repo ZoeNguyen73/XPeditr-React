@@ -122,7 +122,7 @@ const ProfileSetup = () => {
                 onChange={handleInputChange}
                 error={formErrors.username}
                 required={true}
-                className="mb-3 items-center"
+                containerStyles="mb-3 items-center"
                 fullWidth={true}
                 centerAlign={true}
               />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { LoaderCircle } from "lucide-react";
+import { LuLoaderCircle } from "react-icons/lu";
 
 import { useAuthContext } from "../context/AuthProvider";
 import { useErrorHandler } from "../context/ErrorHandlerProvider";
@@ -72,7 +72,7 @@ const Activate = () => {
     <div>
       { isLoading && (
         <div className="flex flex-row gap-2">
-          <LoaderCircle className="animate-spin h-4 w-4 mr-2" />
+          <LuLoaderCircle className="animate-spin h-4 w-4 mr-2" />
           <p className="text-4xl font-accent tracking-wider font-medium text-yellow">Account activation in process...</p>
         </div>
       )} 

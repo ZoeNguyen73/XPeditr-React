@@ -45,6 +45,16 @@ const handleGlobalError = (error, handleFormError) => {
         handleFormError(details, "email");
       } else if (details.includes("password")) {
         handleFormError(details, "password");
+      } else if (details.includes("description")) {
+        handleFormError(details, "description");
+      } else if (details.includes("title")) {
+        handleFormError(details, "title");
+      } else if (details.includes("type")) {
+        handleFormError(details, "type");
+      } else if (details.includes("due_date")) {
+        handleFormError(details, "due_date");
+      } else if (details.includes("parent_quest")) {
+        handleFormError(details, "parent_quest");
       } else {
         type = "unknown";
         message = "Unknown form error";

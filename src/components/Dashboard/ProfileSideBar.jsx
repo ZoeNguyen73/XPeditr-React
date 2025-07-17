@@ -111,7 +111,7 @@ const ProfileSideBar = () => {
 
         { STATS_DATA.length > 0 && (
           STATS_DATA.map(stat => 
-            <StatDisplay id={stat.code} stat={stat} containerStyles="w-5/6 mt-4" />
+            <StatDisplay key={stat.code} stat={stat} containerStyles="w-5/6 mt-4" />
           )
         )}
 

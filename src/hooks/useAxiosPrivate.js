@@ -10,7 +10,8 @@ const useAxiosPrivate = () => {
   const { auth } = useAuthContext();
 
   useEffect(() => {
-
+    console.log("[useAxiosPrivate] Effect ran", auth?.accessToken);
+    console.log("[useAxiosPrivate] Setting up interceptors");
     const requestIntercept = axiosPrivate.interceptors.request.use(
       config => {
         if (!config.headers["Authorization"]) {
@@ -23,7 +24,12 @@ const useAxiosPrivate = () => {
     const responseIntercept = axiosPrivate.interceptors.response.use(
       response => response,
       async (error) => {
+
         const prevRequest = error?.config;
+
+        if (!prevRequest) {
+          console.warn("[useAxiosPrivate] Error has no config — skipping refresh");
+        }
 
         // if the 1st request returns 401 Unauthorized and it hasn't been re-requested yet
         if (error?.response?.status === 401 && !prevRequest?._retry) {
@@ -42,7 +48,7 @@ const useAxiosPrivate = () => {
 
         return Promise.reject(error); // fallback reject in case the re-request fails
       }
-        );
+    );
 
     return () => {
       axiosPrivate.interceptors.request.eject(requestIntercept);

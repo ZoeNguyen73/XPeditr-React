@@ -1,6 +1,6 @@
 import React from "react";
 
-import { LoaderCircle } from "lucide-react";
+import { LuLoaderCircle } from "react-icons/lu";
 
 import { cn } from "../../utils/ClassName";
 
@@ -51,7 +51,7 @@ const Button = ({
           <p>{icon}</p>
         )}
         { isLoading && (
-          <LoaderCircle className="animate-spin h-4 w-4 mr-2" />
+          <LuLoaderCircle className="animate-spin h-4 w-4 mr-2" />
         )}
         <p>{title}</p>
         

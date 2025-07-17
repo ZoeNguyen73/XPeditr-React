@@ -1,5 +1,6 @@
 import { useState, useReducer } from "react";
 import { LuChevronRight, LuChevronsDown } from "react-icons/lu";
+import { useNavigate } from "react-router-dom";
 
 import QuestNode from "./QuestNode";
 
@@ -43,6 +44,7 @@ const reducer = (state, action) => {
 };
 
 const QuestTree = ({ quests, selectedIndex, setSelectedIndex }) => {
+  const navigate = useNavigate();
 
   // Default open state for all quests
   const getInitialState = (quests) => {
@@ -62,10 +64,13 @@ const QuestTree = ({ quests, selectedIndex, setSelectedIndex }) => {
   return (
     <div className="relative rounded-xl h-full w-full bg-sidebar p-3 flex flex-col">
       <p className="font-accent text-orange font-medium text-2xl tracking-wider">Active Quests</p>
-      <div className="bg-gray h-[1px] mx-20 mt-3" />
+      <div className="bg-gray/50 h-[1px] mx-20 mt-3" />
 
       {/* TO DO: allow user to quick add related quest in this veiw */}
-      <div className="border-1 border-gray/80 dark:border-gray/20 border-dotted w-full rounded-xl px-3 py-1 mt-4 cursor-pointer hover:bg-gray/15 dark:hover:bg-gray/5">
+      <div 
+        className="border-1 border-gray/80 dark:border-gray/20 border-dotted w-full rounded-xl px-3 py-1 mt-4 cursor-pointer hover:bg-gray/15 dark:hover:bg-gray/5"
+        onClick={() => navigate("/quests/create")}
+      >
         <p className="text-base text-gray/80 dark:text-gray/50">+ Add a <span className="font-medium">Quest</span></p>
       </div>
 

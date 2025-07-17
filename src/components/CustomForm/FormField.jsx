@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Eye, EyeOff } from "lucide-react";
+import { LuEye, LuEyeOff } from "react-icons/lu";
 
 import { cn } from "../../utils/ClassName";
 
@@ -25,7 +25,7 @@ const FormField = ({
   size = "md",
   fullWidth = false,
   centerAlign = false,
-  className = "",
+  containerStyles = "",
   multiline= false,
   rows = 4,
   maxLength,
@@ -68,7 +68,7 @@ const FormField = ({
   };
   
   return (
-    <div className={cn("flex-col", fullWidth && "w-full", className)}>
+    <div className={cn("flex-col", fullWidth && "w-full", containerStyles)}>
       <div
         className={cn("flex flex-row gap-2 items-center")}
       >
@@ -100,7 +100,7 @@ const FormField = ({
               className="absolute right-3 text-gray-400 hover:text-gray-600 focus:outline-none"
               tabIndex={-1}
             >
-              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              {showPassword ? <LuEyeOff className="h-4 w-4" /> : <LuEye className="h-4 w-4" />}
             </button>
           )}
 
@@ -108,18 +108,18 @@ const FormField = ({
       </div>
 
       <div className="flex justify-between mt-1">
-          {helperText && !error && (
-            <p className="text-xs font-italic font-sans text-gray">{helperText}</p>
-          )}
+        {helperText && !error && (
+          <p className="text-xs font-italic font-sans text-gray">{helperText}</p>
+        )}
 
-          {error && <p className="text-xs font-sans font-italic text-red">{error}</p>}
+        {error && <p className="text-xs font-sans font-italic text-red">{error}</p>}
 
-          {/* Character counter */}
-          {maxLength && typeof value === "string" && (
-            <p className="text-xs font-sans font-italic text-gray ml-auto">{value.length}/{maxLength}</p>
-          )}
+        {/* Character counter */}
+        {maxLength && typeof value === "string" && (
+          <p className="text-xs font-sans font-italic text-gray ml-auto">{value.length}/{maxLength}</p>
+        )}
 
-        </div>
+      </div>
     </div>
     
   )
